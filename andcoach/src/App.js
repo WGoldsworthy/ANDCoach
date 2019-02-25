@@ -2,12 +2,28 @@ import React, { Component } from 'react';
 import './styles/App.css';
 
 import GoogleLogin from 'react-google-login';
+import axios from 'axios';
 
 class App extends Component {
   render() {
 
     const responseGoogle = (response) => {
-      console.log(response);
+
+      var userId = response.googleId;
+      var firstName = response.profileObj.givenName;
+      var lastName = response.profileObj.familyName;
+      var email = response.profileObj.email;
+      var imageUrl = response.profileObj.imageUrl;
+
+      axios.post('./users/login', {
+        userId: userId,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        imageUrl: imageUrl,
+      }).then(function(response) {
+        console.log(response);
+      });
     }
 
     return (
