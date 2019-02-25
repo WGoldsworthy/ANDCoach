@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './styles/App.css';
 
-import Login from './components/Login/Login';
+import GoogleLogin from 'react-google-login';
 
 class App extends Component {
   render() {
+
+    const responseGoogle = (response) => {
+      console.log(response);
+    }
+
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1>Accelerating your digital aspirations</h1>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <Login />
+          <GoogleLogin 
+            clientId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}/>
         </header>
       </div>
     );

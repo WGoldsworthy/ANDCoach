@@ -18,6 +18,8 @@ app.use(
   })
 );
 
+app.disable('etag');
+
 // Set Static Folder
 app.use(express.static(path.join(__dirname, "src")));
 

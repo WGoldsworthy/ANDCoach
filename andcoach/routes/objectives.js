@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 const Objective = require("../objective")
 
-
-
 var mongoose = require("mongoose");
 const API_PORT = 3001
+
+var app = express();
 
 const dbRoute = "mongodb+srv://admin:admin@cluster0-isrpn.mongodb.net/objectives?retryWrites=true";
 
@@ -27,7 +27,7 @@ Objective.remove({}, function(err) {
 });
 
 var objective = {
-	title: "test2"
+	title: "tes"
 }
 
 Objective.create(objective, function(err, results) {
@@ -35,6 +35,14 @@ Objective.create(objective, function(err, results) {
   return;
 })
 
+// Requests are made to port 3001
+router.get("/objectives", function(req, res) {
 
+	Objective.find((err, data) => {
+		console.log(data);
+		if (err) return res.json({success: false, error: err});
+		return res.json({success: true, data: data});
+	})
+})
 
 module.exports = router;
