@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './styles/App.css';
-
-import GoogleLogin from 'react-google-login';
 import axios from 'axios';
-
 import LoginContent from './components/Login/Login';
 import UserDetails from './components/UserDetails/UserDetails';
 
