@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import './styles/App.css';
 
+import GoogleLogin from 'react-google-login';
+import axios from 'axios';
+
 import LoginContent from './components/Login/Login';
+
 
 class App extends Component {
 
@@ -17,19 +21,45 @@ class App extends Component {
   }  
 
   render() {
+    
     const responseGoogleSuccess = (response) => {
-      console.log(response);
-      this.setState({
+      // console.log(response);
+
+      if (!response.error) {
+
+        var userId = response.googleId;
+        var firstName = response.profileObj.givenName;
+        var lastName = response.profileObj.familyName;
+        var email = response.profileObj.email;
+        var imageUrl = response.profileObj.imageUrl;
+
+        axios.post('./users/login', {
+          userId: userId,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          imageUrl: imageUrl,
+    }).then(function (response) {
+      // Redirect to objectives dashboard.
+      // Also need logic for if bad response from google auth. i.e. not authorised
+
+    });
+
+    this.setState({
         loggedIn: true,
         firstName: response.profileObj.givenName,
         lastName: response.profileObj.familyName,
         profilePic: response.profileObj.imageUrl,
         email: response.profileObj.email
-      });
+    });
+
+    }
+
+
     }
 
     const responseGoogleFail = (response) => {
-      console.log(response);
+      // console.log(response);
       this.setState({loggedIn: false});
     }
 
@@ -43,7 +73,7 @@ class App extends Component {
             loginFail={responseGoogleFail}/> :
           <div 
             className="profile-content">
-            <h1>You are successfully Sined In</h1>
+            <h1>You are successfully Signed In</h1>
             <p>First Name: {this.state.firstName}</p>
             <p>Last Name: {this.state.lastName}</p>
             <p>Email: {this.state.email}</p>
@@ -54,5 +84,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;

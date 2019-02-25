@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 
 var index = require("./routes/index");
 var objectives = require("./routes/objectives");
+var users = require("./routes/users")
 
 const cors = require("cors");
 
@@ -18,6 +19,33 @@ app.use(
   })
 );
 
+app.use(
+  cors({
+    origin: "http://localhost:3001",
+    credentials: true
+  })
+);
+
+var mongoose = require("mongoose");
+const API_PORT = 3001
+
+var app = express();
+
+const dbRoute = "mongodb+srv://admin:admin@cluster0-isrpn.mongodb.net/objectives?retryWrites=true";
+
+// connects our back end code with the database
+mongoose.connect(
+  dbRoute,
+  { useNewUrlParser: true }
+);
+
+let db = mongoose.connection;
+
+db.once("open", () => console.log("connected to the database"));
+
+// checks if connection with the database is successful
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
 app.disable('etag');
 
 // Set Static Folder
@@ -29,6 +57,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/", index);
 app.use("/api", objectives);
+app.use("/users", users)
 
 app.listen(port, function() {
   console.log("Server started on port " + port);
