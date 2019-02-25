@@ -9,22 +9,28 @@ class App extends Component {
 
     const responseGoogle = (response) => {
 
-      var userId = response.googleId;
-      var firstName = response.profileObj.givenName;
-      var lastName = response.profileObj.familyName;
-      var email = response.profileObj.email;
-      var imageUrl = response.profileObj.imageUrl;
+if (!response.error) {
 
-      axios.post('./users/login', {
-        userId: userId,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        imageUrl: imageUrl,
-      }).then(function(response) {
-        // Redirect to objectives dashboard. 
-        // Also need logic for if bad response from google auth. i.e. not authorised
-      });
+
+  var userId = response.googleId;
+  var firstName = response.profileObj.givenName;
+  var lastName = response.profileObj.familyName;
+  var email = response.profileObj.email;
+  var imageUrl = response.profileObj.imageUrl;
+
+  axios.post('./users/login', {
+    userId: userId,
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    imageUrl: imageUrl,
+  }).then(function (response) {
+    // Redirect to objectives dashboard.
+    // Also need logic for if bad response from google auth. i.e. not authorised
+  });
+
+}
+
     }
 
     return (
