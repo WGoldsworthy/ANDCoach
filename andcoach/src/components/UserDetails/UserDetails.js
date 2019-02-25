@@ -1,12 +1,16 @@
 import React from 'react';
 
 const UserDetails = (props) => {
+
+  const uPicResized = props.uPic.replace("/s96-c", '');
+  console.log(uPicResized)
   return (
-    <div className='UserDetails'>
-      Welcome {' ' + props.firstName}!
-      <img src={props.profilePic} />
-      {/* Welcome Krisz!
-      <img src="https://via.placeholder.com/150" /> */}
+    <div className='user-details'>
+      <img src={uPicResized} />
+      <div className="text-content">
+        <p>Welcome {' ' + props.uName}!</p>
+      </div>
+      
     </div>
   );
 }
