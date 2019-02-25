@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
+import Nav from './Nav';
+import Logo from '../../assets/images/logo.png';
 
 class Header extends Component {
   state = {
-    name: 'Name Name',
-    profilePic: 'https://via.placeholder.com/150'
+   menuItems: [
+    {title: 'Objectives'},
+    {title: 'Meeting Notes'}],
   }
+
+
   render() {
     return (
         <div className='Header'>
             <div className='Logo'>
-              <img height='100px' src={require('./AND_LOGO_RGB_ON_WHITE.webp')}/>
-              <br />Coach
+              <img src = {Logo} />
             </div>
-            <p>
-            <a class='Header' href="">Objectives</a>
-            <a class='Header' href="">Meeting Notes</a>
-            <a class='Header' href=''>Log Out</a> </p>
+            {this.state.menuItems.map((navItem, index) => {
+              return <Nav 
+                name={navItem.title}/>
+            })}
         </div>
     );
   }
