@@ -4,6 +4,10 @@ var User = require("../models/User");
 
 router.post("/login", (req, res) => {
 
+	if (!req.body.userId){
+		return res.send(401);
+	}
+
 	let user = new User();
 	const {id, userId, firstName, lastName, email, imageUrl} = req.body;
 

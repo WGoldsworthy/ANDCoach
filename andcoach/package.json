@@ -5,9 +5,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "mocha": "^6.0.1",
     "mongojs": "^2.6.0",
     "mongoose": "^5.4.15",
     "react": "^16.8.3",
@@ -23,6 +26,7 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "test": "react-scripts test",
+    "backend-test": "mocha",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:3001",
