@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './styles/App.css';
 
 import GoogleLogin from 'react-google-login';
+import Logo from './assets/images/logo.png'
+//import Landing from './components/Landing/Landing.js';
 
 class App extends Component {
   render() {
@@ -13,8 +15,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <img src={Logo}/>
           <h1>Accelerating your digital aspirations</h1>
-          <GoogleLogin 
+          <GoogleLogin
             clientId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={responseGoogle}
