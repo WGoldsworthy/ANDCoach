@@ -14,7 +14,8 @@
 
 /* ACTION ICONS  */
 body {
-  font-family: "SofiaProLight", Arial, "Helvetica Neue", Helvetica, sans-serif; }
+  font-family: "SofiaProLight", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px; }
 
 .App {
   text-align: center; }
@@ -48,3 +49,112 @@ h1 {
 
 img {
   max-height: 100px; }
+
+.ObjectivesList {
+  margin-left: 250px;
+  font-size: 2em;
+  font-weight: bold;
+  color: black; }
+
+.UserDetails {
+  color: white;
+  margin-left: 30px;
+  width: 160px;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #FF323C;
+  text-align: center;
+  line-height: 1.5em;
+  float: left; }
+
+.ObjectivesPage {
+  padding-top: 30px;
+  background-color: white;
+  padding-bottom: 50px; }
+
+.ObjectiveCard {
+  align-items: center;
+  justify-content: flex-start; }
+
+.Status {
+  margin: 10px;
+  width: 100px;
+  font-size: 0.5em;
+  color: #009CDA;
+  line-height: 1.5em;
+  text-align: center; }
+
+status_name {
+  color: black; }
+
+.Evidence {
+  margin: 10px;
+  font-size: 0.5em;
+  margin: 10px;
+  text-align: center;
+  color: #009CDA; }
+
+.ObjectiveDetails {
+  background: white;
+  max-width: 600px;
+  min-width: 600px;
+  line-height: 1.2em;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: black;
+  border: 2px solid #009CDA;
+  cursor: pointer; }
+
+.NoteDetails {
+  background: white;
+  max-width: 700px;
+  min-width: 700px;
+  line-height: 1.2em;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: black;
+  border: 2px solid #009CDA;
+  cursor: pointer; }
+
+.Header {
+  text-align: center;
+  background-color: #FF323C;
+  padding-bottom: 10px;
+  white-space: nowrap; }
+
+a.Header {
+  font-size: 1.5em;
+  text-decoration: none;
+  color: white;
+  margin: 60px; }
+
+a.Header:active {
+  color: #009CDA; }
+
+.Logo {
+  text-align: center;
+  font-size: 70px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px; }
+
+.ObjectiveWindow {
+  padding: 50px;
+  background-color: grey;
+  font-size: 16px; }
+
+p {
+  margin-top: 30px;
+  color: white;
+  font-weight: bold;
+  line-height: 1.5em; }
+
+textarea, input {
+  font-size: 16px; }
+
+button {
+  cursor: pointer; }

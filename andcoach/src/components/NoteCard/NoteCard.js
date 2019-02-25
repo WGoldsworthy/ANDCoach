@@ -8,13 +8,13 @@ class NoteCard extends Component {
   }
   render() {
     return (
-      <div className = 'NoteDetails'>
+      <li className = 'NoteDetails'>
         <div>
           <h3>{this.state.date}</h3>
           <h2>{this.state.title}</h2>
           <h3>{this.state.body}</h3>
         </div>
-      </div>
+      </li>
     );
   }
 }

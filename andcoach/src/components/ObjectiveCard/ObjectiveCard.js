@@ -15,7 +15,7 @@ class ObjectiveCard extends Component {
 
   render() {
     return (
-      <div className='ObjectiveCard'>
+      <li className='ObjectiveCard'>
         <div className = 'ObjectiveDetails' onClick={this.handleCardClick}>
           <div>
             <h2>{this.state.title}</h2>
@@ -29,7 +29,7 @@ class ObjectiveCard extends Component {
         <div className = "Evidence">
           {this.state.evidence}
         </div>
-      </div>
+      </li>
 
     );
   }
