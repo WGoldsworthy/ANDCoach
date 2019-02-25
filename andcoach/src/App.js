@@ -22,7 +22,8 @@ class App extends Component {
         email: email,
         imageUrl: imageUrl,
       }).then(function(response) {
-        console.log(response);
+        // Redirect to objectives dashboard. 
+        // Also need logic for if bad response from google auth. i.e. not authorised
       });
     }
 
