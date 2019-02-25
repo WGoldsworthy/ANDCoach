@@ -9,8 +9,8 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('User Success Login', () => {
-	it('Should return user is authenticated, 200 response', (done) => {
+describe('User Wrong Domain Login', () => {
+	it('Should return 401 response', (done) => {
 
 		let user = {
 			id: "0",
@@ -25,7 +25,7 @@ describe('User Success Login', () => {
 			.post('/users/login')
 			.send(user)
 			.end((err, res) => {
-				res.should.have.status(200);
+				res.should.have.status(401);
 				done();
 			});
 	});
@@ -41,6 +41,28 @@ describe('User Fail Login', () => {
 			.send(user)
 			.end((err, res) => {
 				res.should.have.status(401);
+				done();
+			});
+	});
+});
+
+describe('User Success Login', () => {
+	it('Should return 200 response', (done) => {
+
+		let user = {
+			id: "0",
+			userId: "23456789",
+			firstName: "Tester",
+			lastName: "McTesterson",
+			email: "test@and.digital",
+			imageUrl: "r6327"
+		};
+
+		chai.request("http://localhost:3001")
+			.post('/users/login')
+			.send(user)
+			.end((err, res) => {
+				res.should.have.status(200);
 				done();
 			});
 	});

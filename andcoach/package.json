@@ -26,7 +26,7 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "test": "react-scripts test",
-    "backend-test": "mocha",
+    "backend-test": "concurrently \"node server.js\" \"mocha\"",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:3001",
