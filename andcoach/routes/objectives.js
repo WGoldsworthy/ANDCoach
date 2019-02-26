@@ -14,7 +14,7 @@ Objective.remove({}, function(err) {
 // Seed data
 var objective = [
 {
-	title: "Test Seed Objective",
+	title: "Test",
 	notes: "Notes Test",
 	evidence: "Link to Google drive document",
 	status: "In Progress",
@@ -60,6 +60,18 @@ router.get("/objectives/:id", function(req, res) {
 	const id = req.params.id;
 
 	Objective.find({user_id: id}, (err, objs) => {
+		if (err) return res.json({success: false, error: err});
+		return res.json({success: true, data: objs})
+	});
+});
+
+
+//Get Objectives by Status
+router.get("/obj/:status", function(req, res) {
+
+	const statu = req.params.status;
+
+	Objective.find({status: status}, (err, objs) => {
 		if (err) return res.json({success: false, error: err});
 		return res.json({success: true, data: objs})
 	});
