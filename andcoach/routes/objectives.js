@@ -1,15 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const Objective = require("../models/objective")
+const Objective = require("../models/Objective")
 
 
-/*
 // Cleanse Database on start-up
 Objective.remove({}, function(err) {
 	if (err) console.log(err);
 });
 
-*/
 
 // Seed data
 var objective = [
@@ -17,14 +15,14 @@ var objective = [
 	title: "Test",
 	notes: "Notes Test",
 	evidence: "Link to Google drive document",
-	status: "In Progress",
+	status: "In",
 	user_id: "0"
 },
 {
 	title: "Test Seed Objective 2",
 	notes: "Notes Test",
 	evidence: "Link to Google drive document",
-	status: "In Progress",
+	status: "I",
 	user_id: "0"
 },
 {
@@ -41,6 +39,26 @@ Objective.create(objective, function(err, results) {
 	  if (err) return err.json({success: false, error: err});
   return;
 })
+
+// Create new objective
+app.post("/objectives/Create", function(req, res) {
+
+	Objective.create(objective, function(err, results) {
+		if (err) return err.json({success: false, error: err});
+		return;
+	})
+})
+
+//Delete objective
+router.delete("/objectives/Delete", function(req, res) {
+
+	Objective.delete(objective, function(err, results) {
+		res.send(req.body.data);
+		return;
+	})
+})
+
+
 
 // Get all objectives for all users
 // DO NOT USE. :)
@@ -67,15 +85,29 @@ router.get("/objectives/:id", function(req, res) {
 
 
 //Get Objectives by Status
-router.get("/obj/:status", function(req, res) {
+router.get("/objStatus/:status", function(req, res) {
 
-	const statu = req.params.status;
+	const status = req.params.status;
 
 	Objective.find({status: status}, (err, objs) => {
 		if (err) return res.json({success: false, error: err});
 		return res.json({success: true, data: objs})
 	});
 });
+
+
+//Get Objectives by Title
+router.get("/objTitle/:title", function(req, res) {
+
+	const title = req.params.title;
+
+	Objective.find({title: title}, (err, objs) => {
+		if (err) return res.json({success: false, error: err});
+		return res.json({success: true, data: objs})
+	});
+});
+
+
 
 
 // router.get("objectives/:uid/objectives/:id", function(req, res) {
