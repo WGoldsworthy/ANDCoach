@@ -27,14 +27,38 @@ h1
   color: $brand-color
 
 img
-  max-height: 100px  
-
-@keyframes App-logo-spin
-  from
-    transform: rotate(0deg)
-
-  to
-    transform: rotate(360deg)
+  max-height: 100px
 
 .logo
-  max-height: 100px
+  max-height: 100px  
+
+.add
+  width: 50px
+  height: 50px
+  border-radius: 50%
+  background: $brand-color
+  color: $white
+  cursor: pointer
+  display: inline-block
+  font-family: $font-awesome
+  position: relative
+  box-shadow: 0 0 8px 0 #584e4e
+
+  &:before
+    content: $plus-icon
+    line-height: 50px
+    font-size: 24px
+
+.fade-in-up
+	-webkit-animation-name: fade-in-up
+	-o-animation-name: fade-in-up
+	animation-name: fade-in-up
+	-webkit-animation-fill-mode: both
+	-o-animation-fill-mode: both
+	animation-fill-mode: both
+	-webkit-animation-duration: 0.7s
+	-o-animation-duration: 0.7s
+	animation-duration: 0.7s
+	-webkit-transform: translate3d(0,0,0)
+	-o-transform: translate3d(0,0,0)
+	transform: translate3d(0,0,0)      
