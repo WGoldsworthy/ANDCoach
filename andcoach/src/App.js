@@ -6,11 +6,14 @@ import UserDetails from './components/UserDetails/UserDetails';
 import ObjectivesContent from './components/ObjectivesContent/ObjectivesContent';
 import Header from './components/Header/Header';
 
+import NotesPage from './components/NotesPage/NotesPage';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
 class App extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       loggedIn: false,
       firstName: null,
@@ -64,6 +67,31 @@ class App extends Component {
             loginSuccess={responseGoogleSuccess}
             loginFail={responseGoogleFail}/> :
           <div className="user-profile">
+          <Router>
+          <div>
+            <ul>
+              <li>
+                <Link to="/">Login</Link>
+              </li>
+              <li>
+                <Link to="/objectives">Objectives</Link>
+              </li>
+              <li>
+                <Link to="/notes">Notes</Link>
+              </li>
+            </ul>
+            <Route exact path="/" component={App} />
+            <Route path="/objectives" component={ObjectivesContent} />
+            <Route path="/notes" 
+              render={(routeProps) => (
+                <NotesPage {...routeProps} 
+                uName={this.state.firstName}
+                uPic={this.state.profilePic}
+                uEmail={this.state.email} />
+              )}
+              />
+          </div>
+        </Router>
             <Header />
             <UserDetails
               uName={this.state.firstName}
