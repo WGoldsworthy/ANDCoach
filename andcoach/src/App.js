@@ -34,7 +34,31 @@ class App extends Component {
 
   }
 
+  checkSess() {
+    var parent = this;
+    axios.get("./users/checkSession").then(function(response) {
+      if (response.data.loggedIn) {
+        var searchString = "./users/get/" + cookies.get('userId');
+        axios.get(searchString).then(function(response) {
+
+          parent.setState({
+            loggedIn: true,
+            firstName: response.data.user.firstName,
+            lastName: response.data.user.lastName,
+            profilePic: response.data.user.imageUrl,
+            email: response.data.user.email
+          });
+
+        })
+      } else {
+        parent.setState({loggedIn: false});
+      }
+    });
+  }
+
 render() {
+
+  this.checkSess();
 
     const responseGoogleSuccess = (response) => {
       if (!response.error) {
