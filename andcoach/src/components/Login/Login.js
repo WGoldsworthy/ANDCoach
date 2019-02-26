@@ -6,8 +6,8 @@ import Logo from '../../assets/images/logo.png';
 const loginContent = (props) => {
   return(
     <header className="App-header">
-      <img src={Logo} alt="logo"/>
-      <h1>Accelerating your digital aspirations</h1>
+      <img className="fade-in-up" src={Logo} alt="logo"/>
+      <h1 className="fade-in-up">Accelerating your digital aspirations</h1>
       <GoogleLogin 
         clientId={props.authId}
         buttonText={props.loginText}

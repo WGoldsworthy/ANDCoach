@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './styles/App.css';
-
-import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 
 import LoginContent from './components/Login/Login';
+import Objectives from './components/Objectives/Objectives';
 
 
 class App extends Component {
@@ -16,15 +15,21 @@ class App extends Component {
       firstName: null,
       lastName: null,
       profilePic: null,
-      email: null
+      email: null,
+      showModal: false,
     }
-  }  
+  }
+
+  addClickHandler = () => {
+    this.setState({showModal: true});
+  }
+
+  closeClickHandler = () => {
+    this.setState({showModal: false})
+  }
 
   render() {
-    
     const responseGoogleSuccess = (response) => {
-      // console.log(response);
-
       if (!response.error) {
 
         var userId = response.googleId;
@@ -39,27 +44,22 @@ class App extends Component {
           lastName: lastName,
           email: email,
           imageUrl: imageUrl,
-    }).then(function (response) {
+        }).then(function (response) {
       // Redirect to objectives dashboard.
       // Also need logic for if bad response from google auth. i.e. not authorised
+        });
 
-    });
-
-    this.setState({
-        loggedIn: true,
-        firstName: response.profileObj.givenName,
-        lastName: response.profileObj.familyName,
-        profilePic: response.profileObj.imageUrl,
-        email: response.profileObj.email
-    });
-
-    }
-
-
+        this.setState({
+          loggedIn: true,
+          firstName: response.profileObj.givenName,
+          lastName: response.profileObj.familyName,
+          profilePic: response.profileObj.imageUrl,
+          email: response.profileObj.email
+        });
+      }
     }
 
     const responseGoogleFail = (response) => {
-      // console.log(response);
       this.setState({loggedIn: false});
     }
 
@@ -78,7 +78,11 @@ class App extends Component {
             <p>Last Name: {this.state.lastName}</p>
             <p>Email: {this.state.email}</p>
             <img src={this.state.profilePic} alt="Profile Pic"/>
-          </div>  
+            <Objectives 
+              addClick={this.addClickHandler.bind(this)}
+              closeClick={this.closeClickHandler}
+              showModal={this.state.showModal}/>
+          </div>
         }
       </div>
     );
