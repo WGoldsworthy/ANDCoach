@@ -51,4 +51,10 @@ router.post("/login", (req, res) => {
 	});
 });
 
+router.get("/logout", (req, res) => {
+	req.universalCookies.set('session', null);
+	req.universalCookies.set('userId', null);
+	return res.send(200);
+});
+
 module.exports = router;

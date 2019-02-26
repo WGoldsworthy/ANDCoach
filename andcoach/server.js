@@ -59,7 +59,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/", index);
 app.use(cookiesMiddleware()).use("/api", objectives);
-app.use("/users", users)
+app.use(cookiesMiddleware()).use("/users", users)
 
 app.listen(port, function() {
   console.log("Server started on port " + port);
