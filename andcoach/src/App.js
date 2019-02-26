@@ -51,6 +51,7 @@ class App extends Component {
             email: response.profileObj.email
         });
       }
+    }
 
     const responseGoogleFail = (response) => {
       this.setState({loggedIn: false});
