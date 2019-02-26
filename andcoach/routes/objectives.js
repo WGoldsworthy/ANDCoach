@@ -3,11 +3,13 @@ var router = express.Router();
 const Objective = require("../models/objective")
 
 
+/*
 // Cleanse Database on start-up
 Objective.remove({}, function(err) {
 	if (err) console.log(err);
 });
 
+*/
 
 // Seed data
 var objective = [
@@ -62,6 +64,7 @@ router.get("/objectives/:id", function(req, res) {
 		return res.json({success: true, data: objs})
 	});
 });
+
 
 // router.get("objectives/:uid/objectives/:id", function(req, res) {
 // 	const {uid, id} = req.params.id;
