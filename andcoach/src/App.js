@@ -5,6 +5,7 @@ import LoginContent from './components/Login/Login';
 import Objectives from './components/Objectives/Objectives';
 import UserDetails from './components/UserDetails/UserDetails';
 import ObjectivesPage from './components/ObjectivesPage/ObjectivesPage';
+import Header from './components/Header/Header';
 
 
 class App extends Component {
@@ -73,6 +74,7 @@ class App extends Component {
             loginSuccess={responseGoogleSuccess}
             loginFail={responseGoogleFail}/> :
           <div className="user-profile">
+            <Header />
             <UserDetails
               uName={this.state.firstName}
               uPic={this.state.profilePic}
@@ -81,10 +83,11 @@ class App extends Component {
               addClick={this.addClickHandler.bind(this)}
               closeClick={this.closeClickHandler}
               showModal={this.state.showModal}/>
+            <ObjectivesPage />
           </div>  
           
         }
-        <ObjectivesPage />
+
       </div>
     );
   }

@@ -9,7 +9,7 @@ class ObjectiveCard extends Component {
       status: 'Not Started',
       editClicked: false,
       addEvidenceClicked: false,
-      saved: true,
+      statusSaved: true,
       evidence: null,
     }
 
@@ -20,12 +20,12 @@ class ObjectiveCard extends Component {
 
 
   handleStatusEditClick = () => {
-    this.setState({editClicked: true, saved: false}); 
+    this.setState({editClicked: true, statusSaved: false}); 
     console.log('clicked edit button');
   }
 
   handleSetSavedProgress = (props) => {
-    this.setState({status: props.selection, saved: true, editClicked: false});
+    this.setState({status: props.selection, statusSaved: true, editClicked: false});
   }
 
   handleOpenEvidence = () => {
@@ -56,7 +56,7 @@ class ObjectiveCard extends Component {
               <div className='status'>
                 Status:&nbsp;
                 {
-                  this.state.saved ? 
+                  this.state.statusSaved ? 
                     <div>
                       {this.state.status}
                       <button onClick={this.handleStatusEditClick}>Edit</button>
@@ -80,14 +80,14 @@ class ObjectiveCard extends Component {
                   <button onClick={this.handleOpenEvidence}>Open Evidence</button>
                 </div>
               </div>
-              : <button onClick={this.handleSetupEvidence}>ADD Evidence</button>}
+              : null}
               {
                 this.state.addEvidenceClicked ?
                   <form onSubmit={this.handleSaveEvidence}>
                     <input type='link' onChange={this.handleEvidenceChange}></input>
                     <button type='submit'>Save Evidence</button>
                   </form>
-              : null 
+              : <button onClick={this.handleSetupEvidence}>ADD Evidence</button> 
               }
             </div>
           </div>
