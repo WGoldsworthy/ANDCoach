@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './styles/App.css';
 import axios from 'axios';
-
 import LoginContent from './components/Login/Login';
 import Objectives from './components/Objectives/Objectives';
+import UserDetails from './components/UserDetails/UserDetails';
 
 
 class App extends Component {
@@ -68,21 +68,20 @@ class App extends Component {
         {!this.state.loggedIn ?
           <LoginContent
             authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
-            loginText="Google Login" 
+            loginText="Google Login"
             loginSuccess={responseGoogleSuccess}
             loginFail={responseGoogleFail}/> :
-          <div 
-            className="profile-content">
-            <h1>You are successfully Signed In</h1>
-            <p>First Name: {this.state.firstName}</p>
-            <p>Last Name: {this.state.lastName}</p>
-            <p>Email: {this.state.email}</p>
-            <img src={this.state.profilePic} alt="Profile Pic"/>
+          <div className="user-profile">
+            <UserDetails
+              uName={this.state.firstName}
+              uPic={this.state.profilePic}
+              uEmail={this.state.email}/>
             <Objectives 
               addClick={this.addClickHandler.bind(this)}
               closeClick={this.closeClickHandler}
               showModal={this.state.showModal}/>
-          </div>
+          </div>  
+          
         }
       </div>
     );
