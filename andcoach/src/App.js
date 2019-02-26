@@ -3,6 +3,7 @@ import './styles/App.css';
 import axios from 'axios';
 import LoginContent from './components/Login/Login';
 import UserDetails from './components/UserDetails/UserDetails';
+import ObjectivesPage from './components/ObjectivesPage/ObjectivesPage';
 
 
 class App extends Component {
@@ -74,6 +75,7 @@ class App extends Component {
             uPic={this.state.profilePic}
             uEmail={this.state.email}/>
         }
+        <ObjectivesPage />
       </div>
     );
   }

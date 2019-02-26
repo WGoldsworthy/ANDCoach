@@ -54,10 +54,9 @@ img {
   max-height: 100px; }
 
 .ObjectivesList {
-  margin-left: 250px;
-  font-size: 2em;
   font-weight: bold;
-  color: black; }
+  color: black;
+  display: grid; }
 
 .user-details {
   color: white;
@@ -78,28 +77,37 @@ img {
   padding: 10px; }
 
 .ObjectivesPage {
-  padding-top: 30px;
+  margin: 20px;
   background-color: white;
-  padding-bottom: 50px; }
+  text-align: left; }
+  .ObjectivesPage li {
+    list-style-type: none; }
 
 .ObjectiveCard {
-  align-items: center;
-  justify-content: flex-start; }
+  display: inline-flex; }
 
-.Status {
+.objective-title {
+  margin: 10px; }
+
+.objective-header {
+  display: inline-flex; }
+
+.objective-notes {
+  margin: 10px; }
+
+.status {
   margin: 10px;
-  width: 100px;
-  font-size: 0.5em;
-  color: #009CDA;
-  line-height: 1.5em;
-  text-align: center; }
+  display: inline-flex; }
+
+.objectives-page-header {
+  top: 0;
+  left: 0;
+  position: relative; }
 
 status_name {
   color: black; }
 
 .Evidence {
-  margin: 10px;
-  font-size: 0.5em;
   margin: 10px;
   text-align: center;
   color: #009CDA; }
@@ -108,14 +116,11 @@ status_name {
   background: white;
   max-width: 600px;
   min-width: 600px;
-  line-height: 1.2em;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 12px;
   color: black;
-  border: 2px solid #009CDA;
-  cursor: pointer; }
+  border: 2px solid #009CDA; }
 
 .NoteDetails {
   background: white;
@@ -127,8 +132,7 @@ status_name {
   margin-bottom: 20px;
   font-size: 12px;
   color: black;
-  border: 2px solid #009CDA;
-  cursor: pointer; }
+  border: 2px solid #009CDA; }
 
 .Header {
   text-align: center;
