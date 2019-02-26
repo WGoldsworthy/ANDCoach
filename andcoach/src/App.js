@@ -3,7 +3,9 @@ import './styles/App.css';
 import axios from 'axios';
 import LoginContent from './components/Login/Login';
 import UserDetails from './components/UserDetails/UserDetails';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 
 class App extends Component {
 
@@ -21,7 +23,6 @@ class App extends Component {
   render() {
 
     const responseGoogleSuccess = (response) => {
-      // console.log(response);
 
       if (!response.error) {
 
@@ -37,27 +38,24 @@ class App extends Component {
           lastName: lastName,
           email: email,
           imageUrl: imageUrl,
-    }).then(function (response) {
-      // Redirect to objectives dashboard.
-      // Also need logic for if bad response from google auth. i.e. not authorised
+        }).then(function (response) {
+          cookies.set('session', response.data.session, {maxAge: 600});
+          cookies.set('userId', response.data.userId, {maxAge: 600});
+        });
 
-    });
-
-    this.setState({
-        loggedIn: true,
-        firstName: response.profileObj.givenName,
-        lastName: response.profileObj.familyName,
-        profilePic: response.profileObj.imageUrl,
-        email: response.profileObj.email
-    });
-
-    }
+        this.setState({
+            loggedIn: true,
+            firstName: response.profileObj.givenName,
+            lastName: response.profileObj.familyName,
+            profilePic: response.profileObj.imageUrl,
+            email: response.profileObj.email
+        });
+      }
 
 
     }
 
     const responseGoogleFail = (response) => {
-      // console.log(response);
       this.setState({loggedIn: false});
     }
 
