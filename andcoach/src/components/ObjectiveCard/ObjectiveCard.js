@@ -16,6 +16,7 @@ class ObjectiveCard extends Component {
     this.handleSetSavedProgress = this.handleSetSavedProgress.bind(this);
     this.handleOpenEvidence = this.handleOpenEvidence.bind(this);
     this.handleStatusEditClick = this.handleStatusEditClick.bind(this);
+
   }
 
 
