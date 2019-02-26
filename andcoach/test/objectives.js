@@ -36,16 +36,60 @@ describe('Get Objectives for an user that doesnt exist', () => {
 	})
 })
 
-describe('Get Objectives for an user that has bad data (username)', () => {
-	it('Should return an empty data object', (done) => {
+describe('Get an individual objective by id', () => {
+	it('Should a single objective', (done) => {
 		chai.request('http://localhost:3001')
-			.get("api/objectives/$%^&*(")
+			.get("api/objectives/findOne/0")
 			.end((err, res) => {
-				res.should.have.status(401);
+				res.should.have.status(200);
 				res.should.be.json;
 				res.body.should.have.property('data');
 				res.body.should.have.property('success').eql(true);
-				res.body.length.should.eql(0);
+				res.body.length.should.eql(1);
+				done();
+			})
+	})
+})
+
+describe('Update an objective', () => {
+	it('Should update a single objective', (done) => {
+
+		let objective = {
+			_id: "0",
+			title: "Test Update",
+			evidence: "Empty",
+			status: "Complete",
+			user_id: "0"
+		}
+
+		chai.request('http://localhost:3001')
+			.post("api/objectives/update")
+			.send(objective)
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.body.should.have.property('success').eql(true);
+				done();
+			})
+	})
+})
+
+describe('Delete an objective', () => {
+	it('Should remove a single objective from the database', (done) => {
+
+		let objective = {
+			_id: "0",
+			title: "Test Update",
+			evidence: "Empty",
+			status: "Complete",
+			user_id: "0"
+		}
+
+		chai.request('http://localhost:3001')
+			.post("api/objectives/delete")
+			.send(objective)
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.body.should.have.property('success').eql(true);
 				done();
 			})
 	})

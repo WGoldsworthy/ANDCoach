@@ -72,5 +72,18 @@ router.get("/objectives/:id", function(req, res) {
 // 	})
 // })
 
+// Update objective
+router.post("objectives/update", (req, res) => {
+	if (!req.body.id) {
+		return res.send(401);
+	}
+
+	const {_id, title, evidence, status, user_id} = req.body;
+})
+
+// Get individual objective
+
+// Delete Objective
+
 
 module.exports = router;
