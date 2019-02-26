@@ -10,6 +10,17 @@ var generate_key = function() {
     return sha.digest('hex');
 };
 
+var sessionChecker = function(req, res, next) {
+	if (req.universalCookies.get('session') && req.universalCookies.get('userId')) {
+		User.find({user_id: req.universalCookies.get('userId'), session: req.universalCookies.get('session')}, (err, user) => {
+			if (err) return res.send(401);
+			return next();
+		})
+	} else {
+		return res.send(401);
+	}
+}
+
 router.post("/login", (req, res) => {
 
 	if (!req.body.userId){
@@ -56,5 +67,16 @@ router.get("/logout", (req, res) => {
 	req.universalCookies.set('userId', null);
 	return res.send(200);
 });
+
+router.get("/checkSession", (req, res) => {
+	if (req.universalCookies.get('session') && req.universalCookies.get('userId')) {
+		User.find({user_id: req.universalCookies.get('userId'), session: req.universalCookies.get('session')}, (err, user) => {
+			if (err) return res.json({loggedIn: false});
+			return res.json({loggedIn: true});
+		})
+	} else {
+		return res.json({loggedIn: false});
+	}
+})
 
 module.exports = router;

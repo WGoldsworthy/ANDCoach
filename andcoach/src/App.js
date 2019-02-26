@@ -9,10 +9,21 @@ import Header from './components/Header/Header';
 
 const cookies = new Cookies();
 
-class App extends Component {
+var checkSession = () => {
+  axios.get("./users/checkSession").then(function(response) {
+    if (response.data.loggedIn) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+}
 
+class App extends Component {
+    
   constructor(props) {
     super(props);
+
     this.state = {
       loggedIn: false,
       firstName: null,
@@ -20,9 +31,11 @@ class App extends Component {
       profilePic: null,
       email: null
     }
+
   }
 
-  render() {
+render() {
+
     const responseGoogleSuccess = (response) => {
       if (!response.error) {
 
