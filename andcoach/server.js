@@ -1,6 +1,9 @@
 var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
+/*var cookieParser = require('cookie-parser');*/
+var session = require('express-session');
+/*var FileStore = require('session-file-store')(session);*/
 
 var index = require("./routes/index");
 var objectives = require("./routes/objectives");
@@ -11,6 +14,35 @@ const cors = require("cors");
 var port = 3001;
 
 var app = express();
+
+/*app.use(cookieParser());*/
+
+/*app.get('/', function (req, res) {
+    // Cookies that have not been signed
+    console.log('Cookies: ', req.cookies)
+
+    // Cookies that have been signed
+    console.log('Signed Cookies: ', req.signedCookies)
+});*/
+
+// Use the session middleware
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+
+/*
+// Access the session as req.session
+app.get('/', function(req, res, next) {
+    if (req.session.views) {
+        req.session.views++
+        res.setHeader('Content-Type', 'text/html')
+        res.write('<p>views: ' + req.session.views + '</p>')
+        res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
+        res.end()
+    } else {
+        req.session.views = 1
+        res.end('welcome to the session demo. refresh!')
+    }
+});
+*/
 
 app.use(
   cors({
