@@ -4,6 +4,8 @@ import axios from 'axios';
 import LoginContent from './components/Login/Login';
 import UserDetails from './components/UserDetails/UserDetails';
 import Cookies from 'universal-cookie';
+import ObjectivesContent from './components/ObjectivesContent/ObjectivesContent';
+import Header from './components/Header/Header';
 
 const cookies = new Cookies();
 
@@ -21,9 +23,7 @@ class App extends Component {
   }
 
   render() {
-
     const responseGoogleSuccess = (response) => {
-
       if (!response.error) {
 
         var userId = response.googleId;
@@ -52,9 +52,6 @@ class App extends Component {
         });
       }
 
-
-    }
-
     const responseGoogleFail = (response) => {
       this.setState({loggedIn: false});
     }
@@ -67,11 +64,18 @@ class App extends Component {
             loginText="Google Login"
             loginSuccess={responseGoogleSuccess}
             loginFail={responseGoogleFail}/> :
-          <UserDetails
-            uName={this.state.firstName}
-            uPic={this.state.profilePic}
-            uEmail={this.state.email}/>
+          <div className="user-profile">
+            <Header />
+            <UserDetails
+              uName={this.state.firstName}
+              uPic={this.state.profilePic}
+              uEmail={this.state.email}/>
+            <ObjectivesContent
+              showModal={this.state.showModal}/>
+          </div>  
+          
         }
+
       </div>
     );
   }

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: 'SofiaProLight';
   src: url("../assets/fonts/Sofia-Pro-Light.eot");
@@ -13,6 +14,18 @@
     font-weight-font-style: normal; }
 
 /* ACTION ICONS  */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(30px);
+    -o-transform: translateY(30px);
+    transform: translateY(30px); }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); } }
+
 body {
   font-family: "SofiaProLight", Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 16px; }
@@ -44,20 +57,102 @@ h1 {
 img {
   max-height: 100px; }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(360deg); } }
-
 .logo {
   max-height: 100px; }
 
+.add {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #FF323C;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "FontAwesome";
+  position: relative;
+  box-shadow: 0 0 8px 0 #584e4e; }
+  .add:before {
+    content: "";
+    line-height: 50px;
+    font-size: 24px; }
+
+.fade-in-up {
+  -webkit-animation-name: fade-in-up;
+  -o-animation-name: fade-in-up;
+  animation-name: fade-in-up;
+  -webkit-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 0.7s;
+  -o-animation-duration: 0.7s;
+  animation-duration: 0.7s;
+  -webkit-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); }
+
+.modal-content {
+  position: relative;
+  background: #ffffff;
+  width: 80%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  padding: 60px 40px;
+  border-radius: 5px; }
+
+.input-container {
+  margin-bottom: 15px;
+  text-align: justify; }
+  .input-container input,
+  .input-container textarea {
+    width: 100%; }
+  .input-container input {
+    padding: 5px;
+    border-radius: 5px; }
+
+.submit-btn {
+  padding: 10px;
+  border-radius: 5px;
+  background: #FF323C;
+  border: 0;
+  margin-top: 15px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out; }
+  .submit-btn:hover {
+    background: #ee3737; }
+
+.modal-content .close-icon {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 5px 8px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: "FontAwesome";
+  font-weight: 900;
+  cursor: pointer; }
+  .modal-content .close-icon:before {
+    content: "";
+    line-height: 16px; }
+
 .ObjectivesList {
-  margin-left: 250px;
-  font-size: 2em;
   font-weight: bold;
-  color: black; }
+  color: black;
+  display: grid; }
 
 .user-details {
   color: white;
@@ -78,28 +173,37 @@ img {
   padding: 10px; }
 
 .ObjectivesPage {
-  padding-top: 30px;
-  background-color: white;
-  padding-bottom: 50px; }
+  margin: 20px;
+  background-color: white; }
+  .ObjectivesPage li {
+    list-style-type: none;
+    text-align: left; }
 
 .ObjectiveCard {
-  align-items: center;
-  justify-content: flex-start; }
+  display: inline-flex; }
 
-.Status {
+.objective-title {
+  margin: 10px; }
+
+.objective-header {
+  display: inline-flex; }
+
+.objective-notes {
+  margin: 10px; }
+
+.status {
   margin: 10px;
-  width: 100px;
-  font-size: 0.5em;
-  color: #009CDA;
-  line-height: 1.5em;
-  text-align: center; }
+  display: inline-flex; }
+
+.objectives-page-header {
+  top: 0;
+  left: 0;
+  position: relative; }
 
 status_name {
   color: black; }
 
 .Evidence {
-  margin: 10px;
-  font-size: 0.5em;
   margin: 10px;
   text-align: center;
   color: #009CDA; }
@@ -108,14 +212,11 @@ status_name {
   background: white;
   max-width: 600px;
   min-width: 600px;
-  line-height: 1.2em;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 12px;
   color: black;
-  border: 2px solid #009CDA;
-  cursor: pointer; }
+  border: 2px solid #009CDA; }
 
 .NoteDetails {
   background: white;
@@ -127,8 +228,7 @@ status_name {
   margin-bottom: 20px;
   font-size: 12px;
   color: black;
-  border: 2px solid #009CDA;
-  cursor: pointer; }
+  border: 2px solid #009CDA; }
 
 .Header {
   text-align: center;
