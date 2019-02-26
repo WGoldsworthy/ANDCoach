@@ -9,7 +9,10 @@ const modal = (props) => {
           className="close-icon"
           onClick={props.modalQuit} >
         </span>
-        <ObjectiveForm/>
+        <ObjectiveForm
+          titleChange={props.updateTitle}
+          descChange={props.updateDesc}
+          formSubmit={props.submitForm}/>
       </div>
     </div>
   );

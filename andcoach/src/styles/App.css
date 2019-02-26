@@ -175,10 +175,10 @@ img {
 
 .ObjectivesPage {
   margin: 20px;
-  background-color: white;
-  text-align: left; }
+  background-color: white; }
   .ObjectivesPage li {
-    list-style-type: none; }
+    list-style-type: none;
+    text-align: left; }
 
 .ObjectiveCard {
   display: inline-flex; }
