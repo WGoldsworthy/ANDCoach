@@ -3,14 +3,29 @@ import './styles/App.css';
 import axios from 'axios';
 import LoginContent from './components/Login/Login';
 import UserDetails from './components/UserDetails/UserDetails';
+import Cookies from 'universal-cookie';
 import ObjectivesContent from './components/ObjectivesContent/ObjectivesContent';
 import Header from './components/Header/Header';
 
+<<<<<<< HEAD
 import NotesPage from './components/NotesPage/NotesPage';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+=======
+const cookies = new Cookies();
+>>>>>>> origin/master
+
+var checkSession = () => {
+  axios.get("./users/checkSession").then(function(response) {
+    if (response.data.loggedIn) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+}
 
 class App extends Component {
-
+    
   constructor(props) {
     super(props);
 
@@ -21,9 +36,11 @@ class App extends Component {
       profilePic: null,
       email: null
     }
+
   }
 
-  render() {
+render() {
+
     const responseGoogleSuccess = (response) => {
       if (!response.error) {
 
@@ -40,16 +57,16 @@ class App extends Component {
           email: email,
           imageUrl: imageUrl,
         }).then(function (response) {
-      // Redirect to objectives dashboard.
-      // Also need logic for if bad response from google auth. i.e. not authorised
+          cookies.set('session', response.data.session, {maxAge: 600});
+          cookies.set('userId', response.data.userId, {maxAge: 600});
         });
 
         this.setState({
-          loggedIn: true,
-          firstName: response.profileObj.givenName,
-          lastName: response.profileObj.familyName,
-          profilePic: response.profileObj.imageUrl,
-          email: response.profileObj.email
+            loggedIn: true,
+            firstName: response.profileObj.givenName,
+            lastName: response.profileObj.familyName,
+            profilePic: response.profileObj.imageUrl,
+            email: response.profileObj.email
         });
       }
     }

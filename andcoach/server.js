@@ -2,6 +2,8 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 
+const cookiesMiddleware = require('universal-cookie-express');
+
 var index = require("./routes/index");
 var objectives = require("./routes/objectives");
 var users = require("./routes/users")
@@ -56,8 +58,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/", index);
-app.use("/api", objectives);
-app.use("/users", users)
+app.use(cookiesMiddleware()).use("/api", objectives);
+app.use(cookiesMiddleware()).use("/users", users)
 
 app.listen(port, function() {
   console.log("Server started on port " + port);
