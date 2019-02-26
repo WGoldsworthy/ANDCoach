@@ -4,7 +4,8 @@ var bodyParser = require("body-parser");
 
 var index = require("./routes/index");
 var objectives = require("./routes/objectives");
-var users = require("./routes/users")
+var users = require("./routes/users");
+var notes = require("./routes/notes");
 
 const cors = require("cors");
 
@@ -31,7 +32,7 @@ const API_PORT = 3001
 
 var app = express();
 
-const dbRoute = "mongodb+srv://admin:admin@cluster0-isrpn.mongodb.net/objectives?retryWrites=true";
+const dbRoute = "mongodb+srv://admin:admin@cluster0-isrpn.mongodb.net/NotesTesting?retryWrites=true";
 
 // connects our back end code with the database
 mongoose.connect(
@@ -57,7 +58,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/", index);
 app.use("/api", objectives);
-app.use("/users", users)
+app.use("/users", users);
+app.use("/notes", notes);
 
 app.listen(port, function() {
   console.log("Server started on port " + port);

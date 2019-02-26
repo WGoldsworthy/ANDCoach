@@ -1,0 +1,17 @@
+// /backend/data.js
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+// this will be our data base's data structure
+const NoteSchema = new Schema(
+    {
+        noteId: { type: String, unique: true, required: true },
+        body: { type: String, required: true },
+        user_id: { type: String, required: true }
+
+    },
+    { timestamps: true }
+);
+
+// export the new Schema so we could modify it using Node.js
+module.exports = mongoose.model("Note", NoteSchema);
