@@ -14,11 +14,13 @@ class Header extends Component {
     return (
         <div className='Header'>
             <div className='Logo'>
-              <img src = {Logo} />
+              <img src = {Logo} alt='logo'/>
             </div>
             {this.state.menuItems.map((navItem, index) => {
               return <Nav 
-                name={navItem.title}/>
+                name={navItem.title}
+                key={index}
+                />
             })}
         </div>
     );
