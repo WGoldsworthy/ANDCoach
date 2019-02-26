@@ -4,6 +4,17 @@ var User = require("../models/User");
 
 router.post("/login", (req, res) => {
 
+	if (!req.body.userId){
+		return res.send(401);
+	}
+
+	var emailDomain = req.body.email.substring(req.body.email.indexOf("@"));
+
+	if (emailDomain != "@and.digital") {
+		return res.send(401);
+	}
+
+
 	let user = new User();
 	const {id, userId, firstName, lastName, email, imageUrl} = req.body;
 

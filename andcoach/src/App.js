@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './styles/App.css';
 import axios from 'axios';
 import LoginContent from './components/Login/Login';
+import Objectives from './components/Objectives/Objectives';
 import UserDetails from './components/UserDetails/UserDetails';
 import ObjectivesPage from './components/ObjectivesPage/ObjectivesPage';
 
@@ -15,15 +16,21 @@ class App extends Component {
       firstName: null,
       lastName: null,
       profilePic: null,
-      email: null
+      email: null,
+      showModal: false,
     }
   }
 
+  addClickHandler = () => {
+    this.setState({showModal: true});
+  }
+
+  closeClickHandler = () => {
+    this.setState({showModal: false})
+  }
+
   render() {
-
     const responseGoogleSuccess = (response) => {
-      // console.log(response);
-
       if (!response.error) {
 
         var userId = response.googleId;
@@ -38,27 +45,22 @@ class App extends Component {
           lastName: lastName,
           email: email,
           imageUrl: imageUrl,
-    }).then(function (response) {
+        }).then(function (response) {
       // Redirect to objectives dashboard.
       // Also need logic for if bad response from google auth. i.e. not authorised
+        });
 
-    });
-
-    this.setState({
-        loggedIn: true,
-        firstName: response.profileObj.givenName,
-        lastName: response.profileObj.familyName,
-        profilePic: response.profileObj.imageUrl,
-        email: response.profileObj.email
-    });
-
-    }
-
-
+        this.setState({
+          loggedIn: true,
+          firstName: response.profileObj.givenName,
+          lastName: response.profileObj.familyName,
+          profilePic: response.profileObj.imageUrl,
+          email: response.profileObj.email
+        });
+      }
     }
 
     const responseGoogleFail = (response) => {
-      // console.log(response);
       this.setState({loggedIn: false});
     }
 
@@ -70,10 +72,17 @@ class App extends Component {
             loginText="Google Login"
             loginSuccess={responseGoogleSuccess}
             loginFail={responseGoogleFail}/> :
-          <UserDetails
-            uName={this.state.firstName}
-            uPic={this.state.profilePic}
-            uEmail={this.state.email}/>
+          <div className="user-profile">
+            <UserDetails
+              uName={this.state.firstName}
+              uPic={this.state.profilePic}
+              uEmail={this.state.email}/>
+            <Objectives 
+              addClick={this.addClickHandler.bind(this)}
+              closeClick={this.closeClickHandler}
+              showModal={this.state.showModal}/>
+          </div>  
+          
         }
         <ObjectivesPage />
       </div>
