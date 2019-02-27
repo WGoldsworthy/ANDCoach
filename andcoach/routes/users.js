@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
 	let user = new User();
 	const {id, userId, firstName, lastName, email, imageUrl} = req.body;
 
-	// user.id = id;
+	user.id = id;
 	user.userId = userId; // Google Id
 	user.firstName = firstName;
 	user.lastName = lastName;
@@ -58,7 +58,7 @@ router.post("/login", (req, res) => {
 				return res.json({success: false, error: err});
 			}
 		} else {
-			return res.json({success: true, session: sessionID});
+			return res.json({success: true, session: sessionID, userId: userId});
 		}
 	});
 });

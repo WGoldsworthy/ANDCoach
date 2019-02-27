@@ -34,6 +34,8 @@ class App extends Component {
 
   }
 
+
+
   checkSess() {
     var parent = this;
     axios.get("./users/checkSession").then(function(response) {
@@ -56,9 +58,11 @@ class App extends Component {
     });
   }
 
-render() {
+  componentDidMount() {
+    this.checkSess();
+  }
 
-  this.checkSess();
+render() {
 
     const responseGoogleSuccess = (response) => {
       if (!response.error) {
