@@ -6,7 +6,7 @@ class ObjectivesPage extends Component {
 
   render(){
     return(
-      <div>
+      <div className = "profile-content container">
         <UserDetails 
         uName={this.props.uName}
         uPic={this.props.uPic}
