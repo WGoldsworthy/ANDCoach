@@ -5,7 +5,11 @@ const Schema = mongoose.Schema;
 // this will be our data base's data structure 
 const ObjectiveSchema = new Schema(
   {
-    title: String
+    title: { type: String, unique: true, required: true },
+    notes: { type: String, required: true },
+    evidence: { type: String, required: true },
+    status: { type: String, required: true },
+    user_id: { type: String, required: true }
   },
   { timestamps: true }
 );

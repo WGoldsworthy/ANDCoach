@@ -15,21 +15,25 @@ class Header extends Component {
   render() {
     return (
       <div className='Header'>
-        <div className='Logo'>
-          <img src = {Logo} alt='logo'/>
+        <div className="container header-content">
+          <div className='logo'>
+            <img src = {Logo} alt='logo'/>
+          </div>
+          <ul className="nav">
+            {/* {this.state.menuItems.map((navItem, index) => {
+              return <Nav 
+                name={navItem.title}
+                key={index}
+                />
+              })} */}
+              <li>
+                <NavLink to="/objectives" activeStyle={{ color: '#2897FF' }} activeClassName="active">Objectives</NavLink>
+              </li>
+              <li>
+                <NavLink to="/notes" activeStyle={{ color: '#2897FF' }} activeClassName="active">Notes</NavLink>
+              </li>
+          </ul>
         </div>
-        {this.state.menuItems.map((navItem, index) => {
-          return <Nav 
-            name={navItem.title}
-            key={index}
-            />
-          })}
-          <li>
-            <NavLink to="/objectives" activeStyle={{ color: '#2897FF' }} activeClassName="active">Objectives</NavLink>
-          </li>
-          <li>
-            <NavLink to="/notes" activeStyle={{ color: '#2897FF' }} activeClassName="active">Notes</NavLink>
-          </li>
       </div>
     );
   }

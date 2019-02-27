@@ -57,8 +57,8 @@ class ObjectiveCard extends Component {
 
   render() {
     return (
-      <li className='ObjectiveCard'>
-        <div className = 'ObjectiveDetails'>
+      <li className='objective-card'>
+        <div className = 'objective-details'>
           <div>
             <div className = 'objective-header'>
               <div className='objective-title'>{this.props.title}</div>
@@ -68,7 +68,11 @@ class ObjectiveCard extends Component {
                   this.state.statusSaved ? 
                     <div>
                       {this.state.status}
-                      <button onClick={this.handleStatusEditClick}>Edit</button>
+                      <button
+                        className="edit"
+                        onClick={this.handleStatusEditClick}>
+                        Edit
+                      </button>
                     </div> : null
                 }
                 

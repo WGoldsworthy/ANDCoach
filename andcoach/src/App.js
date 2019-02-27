@@ -36,6 +36,8 @@ class App extends Component {
 
   }
 
+
+
   checkSess() {
     var parent = this;
     axios.get("./users/checkSession").then(function(response) {
@@ -58,9 +60,11 @@ class App extends Component {
     });
   }
 
-render() {
+  componentDidMount() {
+    this.checkSess();
+  }
 
-  this.checkSess();
+render() {
 
     const responseGoogleSuccess = (response) => {
       if (!response.error) {
@@ -98,6 +102,7 @@ render() {
 
     return (
       <div className="App">
+<<<<<<< HEAD
       <Router>
         <div>
           {!this.state.loggedIn ?
@@ -133,6 +138,28 @@ render() {
           }
         </div>
       </Router>
+=======
+        {!this.state.loggedIn ?
+          <LoginContent
+            authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
+            loginText="Google Login"
+            loginSuccess={responseGoogleSuccess}
+            loginFail={responseGoogleFail}/> :
+          <div className="user-profile">
+            <Header />
+            <div className="profile-content container">
+              <UserDetails
+                uName={this.state.firstName}
+                uPic={this.state.profilePic}
+                uEmail={this.state.email}/>
+              <ObjectivesContent
+                showModal={this.state.showModal}/>
+            </div>
+          </div>  
+          
+        }
+
+>>>>>>> origin/master
       </div>
     );
   }

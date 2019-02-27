@@ -1,5 +1,6 @@
 .modal
   position: fixed
+  z-index: 2
   top: 0
   left: 0
   width: 100%
@@ -22,14 +23,18 @@
 .input-container
   margin-bottom: 15px
   text-align: justify
+  position: relative
+  overflow: hidden
 
   input,
   textarea
     width: 100%
+    border: solid $greyscale-2
+    border-width: 0 0 2px 0
+    border-color: $brand-color
 
   input
     padding: 5px
-    border-radius: 5px
 
 .submit-btn
   padding: 10px
@@ -49,7 +54,7 @@
   position: absolute
   top: -15px
   right: -10px
-  background: rgba($black, 0.6)
+  background: rgba($greyscale-2, 0.6)
   padding: 5px 8px
   border-radius: 50%
   color: $white
