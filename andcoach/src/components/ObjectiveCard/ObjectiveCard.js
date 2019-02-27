@@ -59,7 +59,11 @@ class ObjectiveCard extends Component {
                   this.state.statusSaved ? 
                     <div>
                       {this.state.status}
-                      <button onClick={this.handleStatusEditClick}>Edit</button>
+                      <button
+                        className="edit"
+                        onClick={this.handleStatusEditClick}>
+                        Edit
+                      </button>
                     </div> : null
                 }
                 

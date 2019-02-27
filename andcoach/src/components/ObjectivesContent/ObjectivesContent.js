@@ -57,10 +57,10 @@ class ObjectivesContent extends Component {
         <div className='objectives-page-header'>
           <h1>Your Objectives</h1>
         </div>
-        <span
+        <button
           className="add"
           onClick={this.addClickHandler}>
-        </span>
+        </button>
         <div className='objectives-list'>
         {this.state.objectives.map((objectiveItem, index) => {
           return <ObjectiveCard 
