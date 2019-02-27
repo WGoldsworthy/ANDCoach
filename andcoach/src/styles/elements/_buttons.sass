@@ -1,0 +1,43 @@
+button
+  font-family: $primary-font
+  font-weight: 900
+  border: 0  
+  transition: 0.2s all ease-in-out
+
+  &:focus
+    outline: 0
+
+  &.login  
+    padding: 10px
+    min-width: 100px
+    background: $brand-color-2
+    color: $white
+    border-radius: 5px
+    font-size: 20px
+
+    &:hover
+      background: rgba($brand-color-2, 0.5)    
+
+  &.add
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    color: $brand-color
+    cursor: pointer
+    font-family: $font-awesome
+    position: relative
+    box-shadow: 0 0 8px 0 #b38b8b
+    font-size: 24px
+
+    &:before
+      content: $plus-icon
+
+  &.edit
+    font-size: 0
+    position: relative
+    font-family: $font-awesome
+
+    &:before
+      content: $edit-icon
+      color: $brand-color-2
+      font-size: 14px    

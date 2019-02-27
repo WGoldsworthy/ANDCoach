@@ -2,35 +2,68 @@ import React, { Component } from 'react';
 import './styles/App.css';
 import axios from 'axios';
 import LoginContent from './components/Login/Login';
-import Objectives from './components/Objectives/Objectives';
 import UserDetails from './components/UserDetails/UserDetails';
-import ObjectivesPage from './components/ObjectivesPage/ObjectivesPage';
+import Cookies from 'universal-cookie';
+import ObjectivesContent from './components/ObjectivesContent/ObjectivesContent';
 import Header from './components/Header/Header';
 
+const cookies = new Cookies();
+
+var checkSession = () => {
+  axios.get("./users/checkSession").then(function(response) {
+    if (response.data.loggedIn) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+}
 
 class App extends Component {
-
+    
   constructor(props) {
     super(props);
+
     this.state = {
       loggedIn: false,
       firstName: null,
       lastName: null,
       profilePic: null,
-      email: null,
-      showModal: false,
+      email: null
     }
+
   }
 
-  addClickHandler = () => {
-    this.setState({showModal: true});
+
+
+  checkSess() {
+    var parent = this;
+    axios.get("./users/checkSession").then(function(response) {
+      if (response.data.loggedIn) {
+        var searchString = "./users/get/" + cookies.get('userId');
+        axios.get(searchString).then(function(response) {
+
+          parent.setState({
+            loggedIn: true,
+            firstName: response.data.user.firstName,
+            lastName: response.data.user.lastName,
+            profilePic: response.data.user.imageUrl,
+            email: response.data.user.email
+          });
+
+        })
+      } else {
+        parent.setState({loggedIn: false});
+      }
+    });
   }
 
-  closeClickHandler = () => {
-    this.setState({showModal: false})
+  componentDidMount() {
+    this.checkSess();
   }
 
-  render() {
+render() {
+
     const responseGoogleSuccess = (response) => {
       if (!response.error) {
 
@@ -47,16 +80,16 @@ class App extends Component {
           email: email,
           imageUrl: imageUrl,
         }).then(function (response) {
-      // Redirect to objectives dashboard.
-      // Also need logic for if bad response from google auth. i.e. not authorised
+          cookies.set('session', response.data.session, {maxAge: 600});
+          cookies.set('userId', response.data.userId, {maxAge: 600});
         });
 
         this.setState({
-          loggedIn: true,
-          firstName: response.profileObj.givenName,
-          lastName: response.profileObj.familyName,
-          profilePic: response.profileObj.imageUrl,
-          email: response.profileObj.email
+            loggedIn: true,
+            firstName: response.profileObj.givenName,
+            lastName: response.profileObj.familyName,
+            profilePic: response.profileObj.imageUrl,
+            email: response.profileObj.email
         });
       }
     }
@@ -75,15 +108,14 @@ class App extends Component {
             loginFail={responseGoogleFail}/> :
           <div className="user-profile">
             <Header />
-            <UserDetails
-              uName={this.state.firstName}
-              uPic={this.state.profilePic}
-              uEmail={this.state.email}/>
-            <Objectives 
-              addClick={this.addClickHandler.bind(this)}
-              closeClick={this.closeClickHandler}
-              showModal={this.state.showModal}/>
-            <ObjectivesPage />
+            <div className="profile-content container">
+              <UserDetails
+                uName={this.state.firstName}
+                uPic={this.state.profilePic}
+                uEmail={this.state.email}/>
+              <ObjectivesContent
+                showModal={this.state.showModal}/>
+            </div>
           </div>  
           
         }
