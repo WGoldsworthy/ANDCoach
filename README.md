@@ -2,8 +2,8 @@
 
 Once cloned, the project is one folder deep, then you need to install packages and then run the dev command.
 
-### cd andcoach
+### `cd andcoach`
 
-### npm install
+### `npm install`
 
-### npm run dev
+### `npm run dev`
