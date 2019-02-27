@@ -7,21 +7,28 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 var objs = [];
-var searchString = './api/objectives/' + cookies.get('userId');
-
-axios.get(searchString).then(function(response) {
-  if (response.data.data.length !== 0) {
-    objs = response.data.data;
-  }
-});
 
 class ObjectivesContent extends Component {
+
 
   state = {
     showModal: false,
     titleValue: '',
     descValue: '',
     objectives: objs,
+    userId: null
+  }
+
+  componentDidMount() {
+
+    var searchString = './api/objectives/' + this.props.userId;
+    var parent = this;
+
+    axios.get(searchString).then(function(response) {
+        objs = response.data.data;
+        parent.setState({objectives: objs})
+    });
+    
   }
 
   addClickHandler = () => {

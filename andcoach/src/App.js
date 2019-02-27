@@ -32,6 +32,7 @@ class App extends Component {
       lastName: null,
       profilePic: null,
       email: null,
+      userId: null,
     }
 
   }
@@ -51,6 +52,7 @@ class App extends Component {
             lastName: response.data.user.lastName,
             profilePic: response.data.user.imageUrl,
             email: response.data.user.email,
+            userId: response.data.user.userId
           });
 
         })
@@ -92,6 +94,7 @@ render() {
             lastName: response.profileObj.familyName,
             profilePic: response.profileObj.imageUrl,
             email: response.profileObj.email,
+            userId: response.googleId
         });
       }
     }
@@ -121,7 +124,8 @@ render() {
                         <ObjectivesPage {...routeProps}
                         uName={this.state.firstName}
                         uPic={this.state.profilePic}
-                        uEmail={this.state.email} />
+                        uEmail={this.state.email}
+                        userId={this.state.userId} />
                       )}
                     />
                     <Route path="/notes" 
