@@ -9,7 +9,8 @@ const UserSchema = new Schema(
     firstName: { type: String, unique: true, required: true },
     lastName: { type: String, required: true },
     email: { type: String, required: true },
-    imageUrl: { type: String, required: true }
+    imageUrl: { type: String, required: true },
+    session: {type: String}
   },
   { timestamps: true }
 );
