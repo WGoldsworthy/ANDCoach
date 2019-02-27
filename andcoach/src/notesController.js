@@ -1,5 +1,3 @@
-var express = require('express');
-var router = express.Router();
 var Note = require("../models/Note");
 
 class NotesController {
@@ -16,7 +14,7 @@ class NotesController {
     static getSingleNote(req, res) {
         const id = req.params.id;
         Note.find({_id: id}, (err, objs) => {
-            if (err) return res.json({success: false, error: err});
+            if (err) return res.status(404).json({success: false, error: err});
             return res.json({success: true, data: objs})
         });
     }
@@ -42,14 +40,13 @@ class NotesController {
     // Update note
     static updateNote(req, res) {
         const id = req.params.id;
-        let note = Note.find({_id: id}, (err, objs) => {
-            if (err) return res.json({success: false, error: err});
-            note.body = req.body.body;
-            note.save(err => {
-                if (err) return res.json({success: false, error: err});
-                return res.json({success: true});
-            })
+
+        Note.findOneAndUpdate({_id: id}, {$set: {"body": req.body.body}}, function(err, note) {
+            if (err) return res.send(500, {error: err});
+            return res.json({success: true});
         });
+
+
     }
 
 

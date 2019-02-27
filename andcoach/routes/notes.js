@@ -3,39 +3,6 @@ var router = express.Router();
 var Note = require("../models/Note");
 const NotesController = require("../src/notesController");
 
-/*
-
-// Cleanse Database on start-up
-Note.remove({}, function(err) {
-    if (err) console.log(err);
-});
-
-// Seed data
-var note = [
-    {
-        noteId: "123",
-        body: "Test Seed Note 1",
-        user_id: "0"
-    },
-    {
-        noteId: "1234",
-        body: "Test Seed Note 2",
-        user_id: "0"
-    },
-    {
-        noteId: "1235",
-        body: "Test Seed Body User 4",
-        user_id: "4"
-    },
-];
-
-
-// Seeding database
-Note.create(note, function(err, results) {
-    if (err) console.log({success: false, error: err});
-    return;
-})
-*/
 
 
 // Get all objectives for all users
