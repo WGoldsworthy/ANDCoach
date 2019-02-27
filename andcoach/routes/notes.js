@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Note = require("../models/Note");
+const NotesController = require("../src/notesController");
 
 /*
 
@@ -39,77 +40,23 @@ Note.create(note, function(err, results) {
 
 // Get all objectives for all users
 // DO NOT USE. :)
-router.get("/notes", function(req, res) {
-
-    Note.find((err, data) => {
-        if (err) return res.json({success: false, error: err});
-        return res.json({success: true, data: data});
-    })
-});
+router.get("/", NotesController.getAllNotes);
 
 
 // Get Notes by User id
-router.get("/notes/:id", function(req, res) {
-
-    const id = req.params.id;
-
-    Note.find({user_id: id}, (err, objs) => {
-        if (err) return res.json({success: false, error: err});
-        return res.json({success: true, data: objs})
-    });
-});
+router.get("/notes/:id", NotesController.getAllNotesForUser);
 
 // Get Note by Note id
-router.get("/note/:id", function(req, res) {
-
-    const id = req.params.id;
-
-    Note.find({_id: id}, (err, objs) => {
-        if (err) return res.json({success: false, error: err});
-        return res.json({success: true, data: objs})
-    });
-});
+router.get("/note/:id", NotesController.getSingleNote);
 
 // Create Note by User id
-router.post("/create", (req, res) => {
-
-    let note = new Note();
-    const {body, user_id} = req.body;
-    note.body = body;
-    note.user_id = user_id; // Google Id
-    note.save(err => {
-        if (err) return res.json({success: false, error: err});
-        return res.json({success: true});
-    })
-});
-
+router.post("/create", NotesController.createNote);
 
 // Edit Note by Note id
-router.post("/update/:id", (req, res) => {
-
-    const id = req.params.id;
-    let note = Note.find({_id: id}, (err, objs) => {
-        if (err) return res.json({success: false, error: err});
-
-    const {id, body, user_id} = req.body;
-    note.body = req.body.body;
-    note.save(err => {
-        if (err) return res.json({success: false, error: err});
-        return res.json({success: true});
-    })
-    });
-});
-
-
+router.post("/update/:id", NotesController.updateNote);
 
 // Delete Note by Note id
-router.post("/delete/:id", (req, res) => {
-    const id = req.params.id;
-    Note.deleteOne({_id: id}, function(err) {
-        if (err) return res.json({success: false, error: err});
-    })
-    return res.json({success: true});
-})
+router.post("/delete/:id", NotesController.deleteNote);
 
 
 
