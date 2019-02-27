@@ -232,7 +232,11 @@ img {
     width: 100%;
     border: solid #323232;
     border-width: 0 0 2px 0;
-    border-color: #FF323C; }
+    border-color: #FF323C;
+    box-sizing: border-box; }
+    .input-container input:focus,
+    .input-container textarea:focus {
+      outline: 0; }
   .input-container input {
     padding: 5px; }
 

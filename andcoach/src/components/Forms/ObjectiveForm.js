@@ -7,7 +7,7 @@ const ObjectiveForm = (props) => {
       <div className="input-container">
         <label>Title* </label>
         <div className="input-holder">
-          <input required type="text" name="Test" onChange={props.titleChange}/>
+          <textarea required type="text" name="Test" onChange={props.titleChange}/>
         </div>
       </div>
       <div className="input-container">

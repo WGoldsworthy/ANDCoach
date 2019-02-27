@@ -24,6 +24,10 @@ class ObjectivesContent extends Component {
     titleValue: '',
     descValue: '',
     objectives: objs,
+    titleEditVal: '',
+    descEditVal: '',
+    titleUpdatedVal: '',
+    descUpdatedVal: ''
   }
 
   addClickHandler = () => {
@@ -39,6 +43,7 @@ class ObjectivesContent extends Component {
   }
 
   titleChangeHandler = (event) => {
+    console.log(this.state.titleValue, event.target.value)
     this.setState({
       titleValue: event.target.value
     });
@@ -73,19 +78,36 @@ class ObjectivesContent extends Component {
           objectives: objs
         });
     });
-
-
-
   }
 
-  objEditHandler = () => {
+  objEditClickHandler = (objectiveItem) => {
+    console.log(objectiveItem);
     this.setState({
       newObj: false,
       editObj: true,
-      showModal: true
+      showModal: true,
+      titleEditVal: objectiveItem.title,
+      descEditVal: objectiveItem.notes
     });
   }
-  
+
+  titleEditChangeHandler = (event) => {
+    // console.log(event.target.value);
+    // this.setState({
+    //   titleUpdatedVal: this.state.titleEditVal + event.target.value
+    // });
+  }
+
+  saveFormHandler = (event) => {
+    event.preventDefault();
+    const updatedTitle = event.target.value
+    const updatedDesc = event.target.value
+    this.setState({
+      titleValue: updatedTitle,
+      descValue: updatedDesc
+    });
+  }
+   
   render() {
     const modal = this.state.showModal;
     return (
@@ -99,12 +121,13 @@ class ObjectivesContent extends Component {
         </button>
         <div className='objectives-list'>
         {this.state.objectives.map((objectiveItem, index) => {
+          console.log(objectiveItem);
           return <ObjectiveCard 
-            title={objectiveItem.title}
+            title={objectiveItem}
             notes={objectiveItem.notes}
             status={objectiveItem.status}
             evidence={objectiveItem.evidence}
-            editClick={this.objEditHandler}
+            editClick={this.objEditClickHandler.bind(this, objectiveItem)}
             key={index}/>
           })}
         </div>
@@ -113,9 +136,13 @@ class ObjectivesContent extends Component {
             modalQuit={this.closeClickHandler}
             updateTitle={this.titleChangeHandler}
             updateDesc={this.descChangeHandler}
+            editedTitle={this.titleEditChangeHandler}
             submitForm={this.objSubmitHandler}
+            formSave={this.saveFormHandler}
             newObj={this.state.newObj}
-            editObj={this.state.editObj}/> : null
+            editObj={this.state.editObj}
+            titleVal={this.state.titleEditVal}
+            descVal={this.state.descEditVal}/> : null
         }
       </div>
     );

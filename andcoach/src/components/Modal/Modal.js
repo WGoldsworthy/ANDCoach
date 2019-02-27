@@ -22,7 +22,10 @@ const modal = (props) => {
          <EditObjectiveForm
           titleChange={props.updateTitle}
           descChange={props.updateDesc}
-          formSubmit={props.submitForm}/> : null
+          formSubmit={props.submitForm}
+          titleValue={props.titleVal}
+          descValue={props.descVal}
+          changedTitle={props.editedTitle}/> : null
         }
       </div>
     </div>
