@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
-import Logo from '../../assets/images/logocoach.png';
-import { Route, NavLink, BrowserRouter as Router } from 'react-router-dom'
+import Logo from '../../assets/images/logo-white-horizontal.png';
+import { NavLink } from 'react-router-dom'
 
 
 class Header extends Component {
@@ -24,11 +24,7 @@ class Header extends Component {
             key={index}
             />
           })}
-          {/* <li>
-            <NavLink exact to="/" activeStyle={{ color: '#2897FF' }} activeClassName="active">Login</NavLink>
-          </li> */}
           <li>
-            {/* color should to go to sass somehow */}
             <NavLink to="/objectives" activeStyle={{ color: '#2897FF' }} activeClassName="active">Objectives</NavLink>
           </li>
           <li>

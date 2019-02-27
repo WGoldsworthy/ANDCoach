@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ObjectivesContent from '../ObjectivesContent/ObjectivesContent';
 import UserDetails from '../UserDetails/UserDetails';
-import Header from '../Header/Header';
 
 class ObjectivesPage extends Component {
 
