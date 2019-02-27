@@ -1,30 +1,44 @@
 var express = require('express');
 var router = express.Router();
-const Objective = require("../models/objective")
+
+var Objective = require("../models/Objective")
+
+var User = require("../models/User");
 
 
-/*
+var sessionChecker = function(req, res, next) {
+	if (req.universalCookies.get('session') && req.universalCookies.get('userId')) {
+		User.find({user_id: req.universalCookies.get('userId'), session: req.universalCookies.get('session')}, (err, user) => {
+			if (err) return res.send(401);
+			return next();
+		})
+	} else {
+		return res.send(401);
+	}
+}
+
+
+
 // Cleanse Database on start-up
 Objective.remove({}, function(err) {
 	if (err) console.log(err);
 });
 
-*/
 
 // Seed data
 var objective = [
 {
-	title: "Test Seed Objective",
+	title: "Test",
 	notes: "Notes Test",
 	evidence: "Link to Google drive document",
-	status: "In Progress",
+	status: "In",
 	user_id: "0"
 },
 {
 	title: "Test Seed Objective 2",
 	notes: "Notes Test",
 	evidence: "Link to Google drive document",
-	status: "In Progress",
+	status: "I",
 	user_id: "0"
 },
 {
@@ -42,12 +56,41 @@ Objective.create(objective, function(err, results) {
   return;
 })
 
+
+//Create Objective
+router.post("/create", (req, res) => {
+
+	let objective = new Objective();
+
+	const {title, notes, evidence, status, user_id} = req.body;
+	objective.title = title;
+	objective.notes = notes;
+	objective.evidence = evidence;
+	objective.status = status;
+	objective.user_id = user_id; // Google Id
+	objective.save(err => {
+		if (err) return res.json({success: false, error: err});
+		return res.json({success: true});
+	})
+});
+
+//Delete objective by id
+router.delete("/objectives/Delete/:id", function(req, res) {
+
+	Objective.delete(objective, function(err, results) {
+		res.send(req.body.data);
+		return;
+	})
+})
+
+
+
 // Get all objectives for all users
 // DO NOT USE. :)
 router.get("/objectives", function(req, res) {
 
+
 	Objective.find((err, data) => {
-		console.log(data);
 		if (err) return res.json({success: false, error: err});
 		return res.json({success: true, data: data});
 	})
@@ -66,14 +109,29 @@ router.get("/objectives/:id", function(req, res) {
 });
 
 
-// router.get("objectives/:uid/objectives/:id", function(req, res) {
-// 	const {uid, id} = req.params.id;
+//Get Objectives by Status
+router.get("/objStatus/:status", function(req, res) {
 
-// 	Objective.find({user_id: uid, _id: id}, (err, objs) => {
-// 		if (err) return res.json({success: false, error: err});
-// 		return res.json({success: true, data: objs})
-// 	})
-// })
+	const status = req.params.status;
+
+	Objective.find({status: status}, (err, objs) => {
+		if (err) return res.json({success: false, error: err});
+		return res.json({success: true, data: objs})
+	});
+});
+
+
+//Get Objectives by Title
+router.get("/objTitle/:title", function(req, res) {
+
+	const title = req.params.title;
+
+	Objective.find({title: title}, (err, objs) => {
+		if (err) return res.json({success: false, error: err});
+		return res.json({success: true, data: objs})
+	});
+});
+
 
 // Update objective
 router.post("objectives/update", (req, res) => {

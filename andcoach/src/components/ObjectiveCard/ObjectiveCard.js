@@ -1,34 +1,102 @@
 import React, { Component } from 'react';
-import ObjectiveWindow from '../ObjectiveWindow/ObjectiveWindow.js';
+import ProgressSelector from './ProgressSelector';
 
 class ObjectiveCard extends Component {
-  state = {
-    title: 'Objective title',
-    body: 'Objective body body body',
-    status: 'status',
-    evidence: 'Evidence:',
+
+  constructor(props){
+    super(props);
+    this.state = {
+      status: 'Not Started',
+      editClicked: false,
+      addEvidenceClicked: false,
+      statusSaved: true,
+      evidence: null,
+    }
+
+    this.handleSetSavedProgress = this.handleSetSavedProgress.bind(this);
+    this.handleOpenEvidence = this.handleOpenEvidence.bind(this);
+    this.handleStatusEditClick = this.handleStatusEditClick.bind(this);
   }
 
-  handleCardClick = () => {
-    console.log('clicked card');
+
+  handleStatusEditClick = () => {
+    this.setState({editClicked: true, statusSaved: false}); 
+    console.log('clicked edit button');
   }
+
+  handleSetSavedProgress = (props) => {
+    this.setState({status: props.selection, statusSaved: true, editClicked: false});
+  }
+
+  handleOpenEvidence = () => {
+    window.open(this.props.evidence);
+  }
+
+  handleSetupEvidence = () => {
+    this.setState({addEvidenceClicked: true});
+  }
+
+  handleSaveEvidence = (event) => {
+    event.preventDefault();
+    this.setState({addEvidenceClicked: false});
+  }
+
+  handleEvidenceChange = (event) => {
+    this.setState({evidence: event.target.value});
+  }
+
 
   render() {
     return (
-      <li className='ObjectiveCard'>
-        <div className = 'ObjectiveDetails' onClick={this.handleCardClick}>
+      <li className='objective-card'>
+        <div className = 'objective-details'>
           <div>
-            <h2>{this.state.title}</h2>
+            <div className = 'objective-header'>
+              <div className='objective-title'>{this.props.title}</div>
+              <div className='status'>
+                Status:&nbsp;
+                {
+                  this.state.statusSaved ? 
+                    <div>
+                      {this.state.status}
+                      <button
+                        className="edit"
+                        onClick={this.handleStatusEditClick}>
+                        Edit
+                      </button>
+                    </div> : null
+                }
+                
+                {
+                  this.state.editClicked ? <ProgressSelector saveHandler = {this.handleSetSavedProgress}/> : null 
+                }
+              </div>
+            </div>
             <hr />
-            <h3>{this.state.body}</h3>
+            <div className='objective-notes'>
+              {this.props.notes}
+            </div>
+            <div className = "Evidence">
+              {this.props.evidence ? 
+              <div>
+                  Evidence Submitted.
+                <div>
+                  <button onClick={this.handleOpenEvidence}>Open Evidence</button>
+                </div>
+              </div>
+              : null}
+              {
+                this.state.addEvidenceClicked ?
+                  <form onSubmit={this.handleSaveEvidence}>
+                    <input type='link' onChange={this.handleEvidenceChange}></input>
+                    <button type='submit'>Save Evidence</button>
+                  </form>
+              : <button onClick={this.handleSetupEvidence}>ADD Evidence</button> 
+              }
+            </div>
           </div>
         </div>
-        <div className = "Status">
-          Status: <h4 style={{color: 'black', margin: 0}}>{this.state.status}</h4>
-        </div>
-        <div className = "Evidence">
-          {this.state.evidence}
-        </div>
+        
       </li>
 
     );
