@@ -53,15 +53,15 @@ class ObjectivesContent extends Component {
   render() {
     const modal = this.state.showModal;
     return (
-      <div className='ObjectivesPage'>
+      <div className='objectives-section'>
         <div className='objectives-page-header'>
           <h1>Your Objectives</h1>
         </div>
-        <span
+        <button
           className="add"
           onClick={this.addClickHandler}>
-        </span>
-        <div className='ObjectivesList'>
+        </button>
+        <div className='objectives-list'>
         {this.state.objectives.map((objectiveItem, index) => {
           return <ObjectiveCard 
             title={objectiveItem.objTitle}
