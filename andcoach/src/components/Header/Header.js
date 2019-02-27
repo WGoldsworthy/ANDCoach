@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
-import Logo from '../../assets/images/logo.png';
+import Logo from '../../assets/images/logocoach.png';
+import { Route, NavLink, BrowserRouter as Router } from 'react-router-dom'
 
 
 class Header extends Component {
   state = {
    menuItems: [
-    {title: 'Objectives'},
-    {title: 'Meeting Notes'}],
+    // {title: 'Objectives'},
+    // {title: 'Meeting Notes'}
+    ],
   }
-
 
   render() {
     return (
@@ -23,6 +24,16 @@ class Header extends Component {
             key={index}
             />
           })}
+          {/* <li>
+            <NavLink exact to="/" activeStyle={{ color: '#2897FF' }} activeClassName="active">Login</NavLink>
+          </li> */}
+          <li>
+            {/* color should to go to sass somehow */}
+            <NavLink to="/objectives" activeStyle={{ color: '#2897FF' }} activeClassName="active">Objectives</NavLink>
+          </li>
+          <li>
+            <NavLink to="/notes" activeStyle={{ color: '#2897FF' }} activeClassName="active">Notes</NavLink>
+          </li>
       </div>
     );
   }

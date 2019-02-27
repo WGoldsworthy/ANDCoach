@@ -4,15 +4,14 @@ import axios from 'axios';
 import LoginContent from './components/Login/Login';
 import UserDetails from './components/UserDetails/UserDetails';
 import Cookies from 'universal-cookie';
+import ObjectivesPage from './components/ObjectivesPage/ObjectivesPage';
 import ObjectivesContent from './components/ObjectivesContent/ObjectivesContent';
 import Header from './components/Header/Header';
 
-<<<<<<< HEAD
 import NotesPage from './components/NotesPage/NotesPage';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
-=======
+import { Redirect } from 'react-router';
 const cookies = new Cookies();
->>>>>>> origin/master
 
 var checkSession = () => {
   axios.get("./users/checkSession").then(function(response) {
@@ -77,49 +76,54 @@ render() {
 
     return (
       <div className="App">
-        {!this.state.loggedIn ?
-          <LoginContent
-            authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
-            loginText="Google Login"
-            loginSuccess={responseGoogleSuccess}
-            loginFail={responseGoogleFail}/> :
-          <div className="user-profile">
-          <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Login</Link>
-              </li>
-              <li>
-                <Link to="/objectives">Objectives</Link>
-              </li>
-              <li>
-                <Link to="/notes">Notes</Link>
-              </li>
-            </ul>
-            <Route exact path="/" component={App} />
-            <Route path="/objectives" component={ObjectivesContent} />
-            <Route path="/notes" 
-              render={(routeProps) => (
-                <NotesPage {...routeProps} 
-                uName={this.state.firstName}
-                uPic={this.state.profilePic}
-                uEmail={this.state.email} />
-              )}
-              />
-          </div>
-        </Router>
-            <Header />
-            <UserDetails
-              uName={this.state.firstName}
-              uPic={this.state.profilePic}
-              uEmail={this.state.email}/>
-            <ObjectivesContent
-              showModal={this.state.showModal}/>
-          </div>  
-          
-        }
+      <Router>
+        <div>
+          {!this.state.loggedIn ?
+            <LoginContent
+              authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
+              loginText="Google Login"
+              loginSuccess={responseGoogleSuccess}
+              loginFail={responseGoogleFail}/> :
 
+            <div>
+              <Redirect to = '/objectives' />
+              <div className="user-profile">
+                
+                  <Header />
+                    {/* <ul>
+                      <li>
+                        <Link to="/">Login</Link>
+                      </li>
+                      <li>
+                        <Link to="/objectives">Objectives</Link>
+                      </li>
+                      <li>
+                        <Link to="/notes">Notes</Link>
+                      </li>
+                    </ul> */}
+                    <Route exact path="/" component={App} />
+                    <Route path="/objectives"
+                      render={(routeProps) => (
+                        <ObjectivesPage {...routeProps}
+                        uName={this.state.firstName}
+                        uPic={this.state.profilePic}
+                        uEmail={this.state.email} />
+                      )}
+                    />
+                    <Route path="/notes" 
+                      render={(routeProps) => (
+                        <NotesPage {...routeProps} 
+                        uName={this.state.firstName}
+                        uPic={this.state.profilePic}
+                        uEmail={this.state.email} />
+                      )}
+                      />
+            </div>
+          </div> 
+          }
+
+        </div>
+      </Router>
       </div>
     );
   }
