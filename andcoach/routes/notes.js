@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Note = require("../models/Note");
 
+/*
 
 // Cleanse Database on start-up
 Note.remove({}, function(err) {
@@ -33,6 +34,7 @@ Note.create(note, function(err, results) {
     if (err) console.log({success: false, error: err});
     return;
 })
+*/
 
 
 // Get all objectives for all users
@@ -40,7 +42,6 @@ Note.create(note, function(err, results) {
 router.get("/notes", function(req, res) {
 
     Note.find((err, data) => {
-        console.log(data);
         if (err) return res.json({success: false, error: err});
         return res.json({success: true, data: data});
     })
@@ -58,12 +59,12 @@ router.get("/notes/:id", function(req, res) {
     });
 });
 
-// Get Note by id
+// Get Note by Note id
 router.get("/note/:id", function(req, res) {
 
     const id = req.params.id;
 
-    Note.find({noteId: id}, (err, objs) => {
+    Note.find({_id: id}, (err, objs) => {
         if (err) return res.json({success: false, error: err});
         return res.json({success: true, data: objs})
     });
@@ -72,10 +73,8 @@ router.get("/note/:id", function(req, res) {
 // Create Note by User id
 router.post("/create", (req, res) => {
 
-
     let note = new Note();
     const {body, user_id} = req.body;
- //   note.id = id;
     note.body = body;
     note.user_id = user_id; // Google Id
     note.save(err => {
@@ -84,17 +83,16 @@ router.post("/create", (req, res) => {
     })
 });
 
+
 // Edit Note by Note id
 router.post("/update/:id", (req, res) => {
 
     const id = req.params.id;
-    let note = Note.find({noteId: id}, (err, objs) => {
+    let note = Note.find({_id: id}, (err, objs) => {
         if (err) return res.json({success: false, error: err});
 
     const {id, body, user_id} = req.body;
-    //   note.id = id;
     note.body = req.body.body;
-    // note.user_id = req.body.user_id; // Google Id
     note.save(err => {
         if (err) return res.json({success: false, error: err});
         return res.json({success: true});
@@ -107,7 +105,7 @@ router.post("/update/:id", (req, res) => {
 // Delete Note by Note id
 router.post("/delete/:id", (req, res) => {
     const id = req.params.id;
-    Note.deleteOne({noteId: id}, function(err) {
+    Note.deleteOne({_id: id}, function(err) {
         if (err) return res.json({success: false, error: err});
     })
     return res.json({success: true});
