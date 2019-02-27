@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
 	let user = new User();
 	const {id, userId, firstName, lastName, email, imageUrl} = req.body;
 
-	user.id = id;
+	// user.id = id;
 	user.userId = userId; // Google Id
 	user.firstName = firstName;
 	user.lastName = lastName;
@@ -49,7 +49,8 @@ router.post("/login", (req, res) => {
 	user.save(err => {
 		if (err) {
 			if (err.code == 11000) {
-				User.findOneAndUpdate({user_id: userId}, user, (err) => {
+				var updateUser = {session: sessionID}
+				User.findOneAndUpdate({userId: userId}, sessionID, (err) => {
 					if (err) return res.send(500, { error: err });
     				return res.json({success: true, session: sessionID, userId: userId});
 				});
@@ -63,7 +64,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/get/:id", (req, res) => {
-	User.findOne({user_id: req.body.userId}, (err, user) => {
+	User.findOne({userId: req.params.id}, (err, user) => {
 		if (err) return res.json({error: err});
 		return res.json({user: user});
 	})
