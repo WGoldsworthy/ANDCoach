@@ -12,15 +12,21 @@ class Header extends Component {
 
   render() {
     return (
-        <div className='Header'>
-            <div className='Logo'>
-              <img src = {Logo} />
-            </div>
-            {this.state.menuItems.map((navItem, index) => {
-              return <Nav 
-                name={navItem.title}/>
-            })}
+      <div className="header">
+      <div className="container header-content">
+        <div className='logo'>
+          <img src = {Logo} alt='logo'/>
         </div>
+        <ul className="nav">
+          {this.state.menuItems.map((navItem, index) => {
+            return <Nav 
+              name={navItem.title}
+              key={index}
+              />
+          })}
+        </ul>
+      </div>
+    </div>
     );
   }
 }

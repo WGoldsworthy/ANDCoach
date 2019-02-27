@@ -1,6 +1,22 @@
 var express = require('express');
 var router = express.Router();
+
 var Objective = require("../models/Objective")
+
+var User = require("../models/User");
+
+
+var sessionChecker = function(req, res, next) {
+	if (req.universalCookies.get('session') && req.universalCookies.get('userId')) {
+		User.find({user_id: req.universalCookies.get('userId'), session: req.universalCookies.get('session')}, (err, user) => {
+			if (err) return res.send(401);
+			return next();
+		})
+	} else {
+		return res.send(401);
+	}
+}
+
 
 
 // Cleanse Database on start-up
@@ -40,6 +56,7 @@ Objective.create(objective, function(err, results) {
   return;
 })
 
+
 //Create Objective
 router.post("/create", (req, res) => {
 
@@ -72,8 +89,8 @@ router.delete("/objectives/Delete/:id", function(req, res) {
 // DO NOT USE. :)
 router.get("/objectives", function(req, res) {
 
+
 	Objective.find((err, data) => {
-		console.log(data);
 		if (err) return res.json({success: false, error: err});
 		return res.json({success: true, data: data});
 	})
