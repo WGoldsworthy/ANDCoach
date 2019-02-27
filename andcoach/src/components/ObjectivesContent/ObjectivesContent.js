@@ -10,7 +10,9 @@ var objs = [];
 var searchString = './api/objectives/' + cookies.get('userId');
 
 axios.get(searchString).then(function(response) {
-  objs = response.data.data;
+  if (response.data.data.length !== 0) {
+    objs = response.data.data;
+  }
 });
 
 class ObjectivesContent extends Component {
@@ -59,7 +61,7 @@ class ObjectivesContent extends Component {
 
     axios.post('./api/create', objective)
       .then(function(response) {
-        objs.push(response.data,objective);
+        objs.push(response.data.objective);
         parent.setState({
           showModal: false,
           objectives: objs
