@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Objective = require("../models/Objective")
+var Objective = require("../models/Objective")
 
 
 // Cleanse Database on start-up
@@ -40,17 +40,25 @@ Objective.create(objective, function(err, results) {
   return;
 })
 
-// Create new objective
-app.post("/objectives/Create", function(req, res) {
+//Create Objective
+router.post("/create", (req, res) => {
 
-	Objective.create(objective, function(err, results) {
-		if (err) return err.json({success: false, error: err});
-		return;
+	let objective = new Objective();
+
+	const {title, notes, evidence, status, user_id} = req.body;
+	objective.title = title;
+	objective.notes = notes;
+	objective.evidence = evidence;
+	objective.status = status;
+	objective.user_id = user_id; // Google Id
+	objective.save(err => {
+		if (err) return res.json({success: false, error: err});
+		return res.json({success: true});
 	})
-})
+});
 
-//Delete objective
-router.delete("/objectives/Delete", function(req, res) {
+//Delete objective by id
+router.delete("/objectives/Delete/:id", function(req, res) {
 
 	Objective.delete(objective, function(err, results) {
 		res.send(req.body.data);
@@ -107,17 +115,6 @@ router.get("/objTitle/:title", function(req, res) {
 	});
 });
 
-
-
-
-// router.get("objectives/:uid/objectives/:id", function(req, res) {
-// 	const {uid, id} = req.params.id;
-
-// 	Objective.find({user_id: uid, _id: id}, (err, objs) => {
-// 		if (err) return res.json({success: false, error: err});
-// 		return res.json({success: true, data: objs})
-// 	})
-// })
 
 
 module.exports = router;
