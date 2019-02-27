@@ -34,7 +34,14 @@ const API_PORT = 3001
 
 var app = express();
 
-const dbRoute = "mongodb+srv://admin:admin@cluster0-isrpn.mongodb.net/objectives?retryWrites=true";
+var dbName;
+if ( process.env.NODE_ENV === 'test' ) {
+    dbName = 'test';
+}
+else {
+    dbName = 'objectives';
+}
+    const dbRoute = "mongodb+srv://admin:admin@cluster0-isrpn.mongodb.net/" + dbName + "?retryWrites=true";
 
 // connects our back end code with the database
 mongoose.connect(
