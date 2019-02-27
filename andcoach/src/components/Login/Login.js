@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 
-import Logo from '../../assets/images/logo.png';
+import Logo from '../../assets/images/logo-white-horizontal.png';
 
 const loginContent = (props) => {
   return(
