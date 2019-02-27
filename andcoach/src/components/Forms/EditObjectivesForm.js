@@ -12,7 +12,7 @@ const ObjectiveForm = (props) => {
       <div className="input-container">
         <label>Description* </label>
         <div className="input-holder">
-          <textarea rows="6" desc="this is description" onChange={props.descChange} value="Initial description"/>
+          <textarea rows="6" desc="this is description" onChange={props.descChange}>This is a test</textarea>
         </div>
       </div>
       <button className="submit-btn">Save</button>
