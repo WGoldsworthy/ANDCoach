@@ -32,7 +32,8 @@ button
     &:before
       content: $plus-icon
 
-  &.edit
+  &.edit,
+  &.edit-obj
     font-size: 0
     position: relative
     font-family: $font-awesome
@@ -40,4 +41,15 @@ button
     &:before
       content: $edit-icon
       color: $brand-color-2
-      font-size: 14px    
+
+  &.edit
+    &:before
+      font-size: 14px      
+
+  &.edit-obj
+    position: absolute
+    top: 5px
+    right: 5px
+
+    &:before
+      font-size: 20px

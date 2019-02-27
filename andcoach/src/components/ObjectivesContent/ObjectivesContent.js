@@ -4,6 +4,8 @@ import Modal from '../Modal/Modal';
 
 class ObjectivesContent extends Component {
   state = {
+    newObj: false,
+    editObj: false,
     showModal: false,
     titleValue: '',
     descValue: '',
@@ -18,7 +20,11 @@ class ObjectivesContent extends Component {
   }
 
   addClickHandler = () => {
-    this.setState({showModal: true});
+    this.setState({
+      editObj: false,
+      newObj: true,
+      showModal: true
+    });
   }
 
   closeClickHandler = () => {
@@ -49,6 +55,14 @@ class ObjectivesContent extends Component {
       }]
     });
   }
+
+  objEditHandler = () => {
+    this.setState({
+      newObj: false,
+      editObj: true,
+      showModal: true
+    });
+  }
   
   render() {
     const modal = this.state.showModal;
@@ -68,6 +82,7 @@ class ObjectivesContent extends Component {
             notes={objectiveItem.objDesc}
             status={objectiveItem.status}
             evidence={objectiveItem.evidence}
+            editClick={this.objEditHandler}
             key={index}/>
           })}
         </div>
@@ -76,7 +91,9 @@ class ObjectivesContent extends Component {
             modalQuit={this.closeClickHandler}
             updateTitle={this.titleChangeHandler}
             updateDesc={this.descChangeHandler}
-            submitForm={this.objSubmitHandler}/> : null
+            submitForm={this.objSubmitHandler}
+            newObj={this.state.newObj}
+            editObj={this.state.editObj}/> : null
         }
       </div>
     );

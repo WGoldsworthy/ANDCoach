@@ -45,7 +45,6 @@ class ObjectiveCard extends Component {
     this.setState({evidence: event.target.value});
   }
 
-
   render() {
     return (
       <li className='objective-card'>
@@ -95,10 +94,13 @@ class ObjectiveCard extends Component {
               }
             </div>
           </div>
+          <button
+            className="edit-obj"
+            onClick={this.props.editClick}>
+              edit
+          </button>
         </div>
-        
       </li>
-
     );
   }
 }

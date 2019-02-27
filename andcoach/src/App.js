@@ -9,16 +9,6 @@ import Header from './components/Header/Header';
 
 const cookies = new Cookies();
 
-var checkSession = () => {
-  axios.get("./users/checkSession").then(function(response) {
-    if (response.data.loggedIn) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-}
-
 class App extends Component {
     
   constructor(props) {
@@ -31,10 +21,7 @@ class App extends Component {
       profilePic: null,
       email: null
     }
-
   }
-
-
 
   checkSess() {
     var parent = this;
