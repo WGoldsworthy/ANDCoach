@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NoteCard from './NoteCard.js';
+import NoteCard from '../NoteCard/NoteCard.js';
 import UserDetails from '../UserDetails/UserDetails.js';
 
 class NotesPage extends Component {
@@ -9,7 +9,11 @@ class NotesPage extends Component {
   render() {
     return (
       <div className='ObjectivesPage'>
-        <UserDetails />
+        <UserDetails 
+        uName={this.props.uName}
+        uPic={this.props.uPic}
+        uEmail={this.props.uEmail}
+        />
         <div className='ObjectivesList'>
         Your Meeting Notes
           <NoteCard />

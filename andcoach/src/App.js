@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import './styles/App.css';
 import axios from 'axios';
 import LoginContent from './components/Login/Login';
-import UserDetails from './components/UserDetails/UserDetails';
 import Cookies from 'universal-cookie';
-import ObjectivesContent from './components/ObjectivesContent/ObjectivesContent';
+import ObjectivesPage from './components/ObjectivesPage/ObjectivesPage';
 import Header from './components/Header/Header';
 
+import NotesPage from './components/NotesPage/NotesPage';
+import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Redirect } from 'react-router';
 const cookies = new Cookies();
 
 class App extends Component {
@@ -19,7 +21,7 @@ class App extends Component {
       firstName: null,
       lastName: null,
       profilePic: null,
-      email: null
+      email: null,
     }
   }
 
@@ -35,7 +37,7 @@ class App extends Component {
             firstName: response.data.user.firstName,
             lastName: response.data.user.lastName,
             profilePic: response.data.user.imageUrl,
-            email: response.data.user.email
+            email: response.data.user.email,
           });
 
         })
@@ -76,7 +78,7 @@ render() {
             firstName: response.profileObj.givenName,
             lastName: response.profileObj.familyName,
             profilePic: response.profileObj.imageUrl,
-            email: response.profileObj.email
+            email: response.profileObj.email,
         });
       }
     }
@@ -87,26 +89,41 @@ render() {
 
     return (
       <div className="App">
-        {!this.state.loggedIn ?
-          <LoginContent
-            authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
-            loginText="Google Login"
-            loginSuccess={responseGoogleSuccess}
-            loginFail={responseGoogleFail}/> :
-          <div className="user-profile">
-            <Header />
-            <div className="profile-content container">
-              <UserDetails
-                uName={this.state.firstName}
-                uPic={this.state.profilePic}
-                uEmail={this.state.email}/>
-              <ObjectivesContent
-                showModal={this.state.showModal}/>
+      <Router>
+        <div>
+          {!this.state.loggedIn ?
+                <LoginContent
+                  authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
+                  loginText="Google Login"
+                  loginSuccess={responseGoogleSuccess}
+                  loginFail={responseGoogleFail}/> 
+          :
+            <div>
+              <Route exact path="/" render={() => (<Redirect to="/objectives"/>)}/>
+              <div className="user-profile">
+                
+                  <Header />
+                    <Route path="/objectives"
+                      render={(routeProps) => (
+                        <ObjectivesPage {...routeProps}
+                        uName={this.state.firstName}
+                        uPic={this.state.profilePic}
+                        uEmail={this.state.email} />
+                      )}
+                    />
+                    <Route path="/notes" 
+                      render={(routeProps) => (
+                        <NotesPage {...routeProps} 
+                        uName={this.state.firstName}
+                        uPic={this.state.profilePic}
+                        uEmail={this.state.email} />
+                      )}
+                      />
             </div>
-          </div>  
-          
-        }
-
+          </div> 
+          }
+        </div>
+      </Router>
       </div>
     );
   }
