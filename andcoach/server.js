@@ -6,7 +6,8 @@ const cookiesMiddleware = require('universal-cookie-express');
 
 var index = require("./routes/index");
 var objectives = require("./routes/objectives");
-var users = require("./routes/users")
+var users = require("./routes/users");
+var notes = require("./routes/notes");
 
 const cors = require("cors");
 
@@ -58,8 +59,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/", index);
+
 app.use(cookiesMiddleware()).use("/api", objectives);
 app.use(cookiesMiddleware()).use("/users", users)
+app.use("/notes", notes);
+
 
 app.listen(port, function() {
   console.log("Server started on port " + port);
