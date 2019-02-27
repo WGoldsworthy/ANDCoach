@@ -10,18 +10,23 @@ class ObjectiveCard extends Component {
       editClicked: false,
       addEvidenceClicked: false,
       statusSaved: true,
-      evidence: null,
+      evidenceSaved: false,
+      evidence: '',
     }
 
     this.handleSetSavedProgress = this.handleSetSavedProgress.bind(this);
     this.handleOpenEvidence = this.handleOpenEvidence.bind(this);
     this.handleStatusEditClick = this.handleStatusEditClick.bind(this);
+    this.handleEvidenceChange = this.handleEvidenceChange.bind(this);
+    this.handleSaveEvidence = this.handleSaveEvidence.bind(this);
+    this.handleSetupEvidence = this.handleSetupEvidence.bind(this);
   }
 
 
   handleStatusEditClick = () => {
     this.setState({editClicked: true, statusSaved: false}); 
     console.log('clicked edit button');
+    console.log(this.state.addEvidenceClicked, this.state.evidence, this.state.evidenceSaved);
   }
 
   handleSetSavedProgress = (props) => {
@@ -29,20 +34,24 @@ class ObjectiveCard extends Component {
   }
 
   handleOpenEvidence = () => {
-    window.open(this.props.evidence);
+    window.open(this.state.evidence);
+    console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   handleSetupEvidence = () => {
-    this.setState({addEvidenceClicked: true});
+    this.setState({addEvidenceClicked: true, evidenceSaved: false});
+    console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   handleSaveEvidence = (event) => {
     event.preventDefault();
-    this.setState({addEvidenceClicked: false});
+    this.setState({addEvidenceClicked: false, evidenceSaved: true});
+    console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   handleEvidenceChange = (event) => {
     this.setState({evidence: event.target.value});
+    //console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
 
@@ -77,22 +86,26 @@ class ObjectiveCard extends Component {
               {this.props.notes}
             </div>
             <div className = "Evidence">
-              {this.props.evidence ? 
+            Evidence:&nbsp;
+              {this.state.evidenceSaved ? 
               <div>
-                  Evidence Submitted.
+                  Submitted
                 <div>
                   <button onClick={this.handleOpenEvidence}>Open Evidence</button>
+                  <button onClick={this.editEvidence}>Edit Evidence</button>
                 </div>
               </div>
-              : null}
-              {
+              :
+              
                 this.state.addEvidenceClicked ?
                   <form onSubmit={this.handleSaveEvidence}>
                     <input type='link' onChange={this.handleEvidenceChange}></input>
                     <button type='submit'>Save Evidence</button>
                   </form>
-              : <button onClick={this.handleSetupEvidence}>ADD Evidence</button> 
-              }
+              : <div>
+                Not Submitted <button onClick={this.handleSetupEvidence}>ADD Evidence</button>
+              </div> 
+              } 
             </div>
           </div>
         </div>
