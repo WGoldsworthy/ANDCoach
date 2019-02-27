@@ -48,8 +48,8 @@ class ObjectiveCard extends Component {
 
   render() {
     return (
-      <li className='ObjectiveCard'>
-        <div className = 'ObjectiveDetails'>
+      <li className='objective-card'>
+        <div className = 'objective-details'>
           <div>
             <div className = 'objective-header'>
               <div className='objective-title'>{this.props.title}</div>

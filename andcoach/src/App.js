@@ -65,12 +65,14 @@ class App extends Component {
             loginFail={responseGoogleFail}/> :
           <div className="user-profile">
             <Header />
-            <UserDetails
-              uName={this.state.firstName}
-              uPic={this.state.profilePic}
-              uEmail={this.state.email}/>
-            <ObjectivesContent
-              showModal={this.state.showModal}/>
+            <div className="profile-content container">
+              <UserDetails
+                uName={this.state.firstName}
+                uPic={this.state.profilePic}
+                uEmail={this.state.email}/>
+              <ObjectivesContent
+                showModal={this.state.showModal}/>
+            </div>
           </div>  
           
         }

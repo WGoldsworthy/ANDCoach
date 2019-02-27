@@ -23,6 +23,12 @@ body
 .App-link
   color: #61dafb
 
+.container 
+  max-width: 1360px
+  margin: 0 auto
+  position: relative  
+  display: flex
+
 h1
   color: $brand-color
 
@@ -36,13 +42,12 @@ img
   width: 50px
   height: 50px
   border-radius: 50%
-  background: $brand-color
-  color: $white
+  color: $brand-color
   cursor: pointer
   display: inline-block
   font-family: $font-awesome
   position: relative
-  box-shadow: 0 0 8px 0 #584e4e
+  box-shadow: 0 0 8px 0 #b38b8b
 
   &:before
     content: $plus-icon
@@ -62,3 +67,6 @@ img
 	-webkit-transform: translate3d(0,0,0)
 	-o-transform: translate3d(0,0,0)
 	transform: translate3d(0,0,0)      
+
+.input-container label
+  font-weight: 700
