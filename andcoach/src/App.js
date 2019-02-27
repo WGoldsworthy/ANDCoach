@@ -25,6 +25,7 @@ class App extends Component {
     
   constructor(props) {
     super(props);
+    document.title = "AND Coach"
 
     this.state = {
       loggedIn: false,
