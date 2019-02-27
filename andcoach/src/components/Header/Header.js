@@ -7,8 +7,6 @@ import { NavLink } from 'react-router-dom'
 class Header extends Component {
   state = {
    menuItems: [
-    // {title: 'Objectives'},
-    // {title: 'Meeting Notes'}
     ],
   }
 
@@ -20,12 +18,6 @@ class Header extends Component {
             <img src = {Logo} alt='logo'/>
           </div>
           <ul className="nav">
-            {/* {this.state.menuItems.map((navItem, index) => {
-              return <Nav 
-                name={navItem.title}
-                key={index}
-                />
-              })} */}
               <li>
                 <NavLink to="/objectives" activeStyle={{ color: '#2897FF' }} activeClassName="active">Objectives</NavLink>
               </li>
