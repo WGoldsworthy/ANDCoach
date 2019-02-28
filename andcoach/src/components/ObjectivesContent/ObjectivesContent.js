@@ -108,7 +108,7 @@ class ObjectivesContent extends Component {
     // const updatedDesc = event.target.value;
     const updatedTitle = this.state.titleEditVal;
     const updatedDesc = this.state.descValue;
-    const objId = this.state.id
+    const objId = this.state.id;
 
     var updateString = './api/objUpdate/' + objId;
     var parent = this;
