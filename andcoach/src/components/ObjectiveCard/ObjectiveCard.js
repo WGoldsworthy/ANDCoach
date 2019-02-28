@@ -6,7 +6,7 @@ class ObjectiveCard extends Component {
   constructor(props){
     super(props);
     this.state = {
-      status: 'Not Started',
+      status: this.props.status,
       editClicked: false,
       addEvidenceClicked: false,
       statusSaved: true,
@@ -25,8 +25,6 @@ class ObjectiveCard extends Component {
 
   handleStatusEditClick = () => {
     this.setState({editClicked: true, statusSaved: false}); 
-    console.log('clicked edit button');
-    console.log(this.state.addEvidenceClicked, this.state.evidence, this.state.evidenceSaved);
   }
 
   handleSetSavedProgress = (props) => {
@@ -35,23 +33,19 @@ class ObjectiveCard extends Component {
 
   handleOpenEvidence = () => {
     window.open(this.state.evidence);
-    console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   handleSetupEvidence = () => {
     this.setState({addEvidenceClicked: true, evidenceSaved: false});
-    console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   handleSaveEvidence = (event) => {
     event.preventDefault();
     this.setState({addEvidenceClicked: false, evidenceSaved: true});
-    console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   handleEvidenceChange = (event) => {
     this.setState({evidence: event.target.value});
-    //console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   render() {
@@ -76,7 +70,7 @@ class ObjectiveCard extends Component {
                 }
                 
                 {
-                  this.state.editClicked ? <ProgressSelector saveHandler = {this.handleSetSavedProgress}/> : null 
+                  this.state.editClicked ? <ProgressSelector id={this.props.id} saveHandler = {this.handleSetSavedProgress}/> : null 
                 }
               </div>
             </div>

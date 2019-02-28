@@ -1,6 +1,6 @@
 import React from 'react';
 import ObjectiveForm from '../Forms/ObjectiveForm';
-import EditObjectiveForm from '../Forms/EditObjectivesForm';
+import EditObjectivesForm from '../Forms/EditObjectivesForm';
 
 const modal = (props) => {
   const newObjForm = props.newObj;
@@ -19,7 +19,7 @@ const modal = (props) => {
             formSubmit={props.submitForm}/> : null
         }
         {editObjForm ? 
-          <EditObjectiveForm
+          <EditObjectivesForm
             titleChange={props.updateTitle}
             descChange={props.updateDesc}
             formSubmit={props.submitForm}

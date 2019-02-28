@@ -29,7 +29,6 @@ class ObjectivesContent extends Component {
     var parent = this;
 
     axios.get(searchString).then(function(response) {
-        console.log(response);
         objs = response.data.data;
         parent.setState({objectives: objs})
     });
@@ -91,21 +90,45 @@ class ObjectivesContent extends Component {
       editObj: true,
       showModal: true,
       titleEditVal: objectiveItem.title,
-      descEditVal: objectiveItem.notes
+      descEditVal: objectiveItem.notes,
+      id: objectiveItem._id,
+      descValue: objectiveItem.notes
     });
   }
 
   titleEditChangeHandler = (event) => {
-    console.log(event.target.value);
     this.setState({
-      titleUpdatedVal: this.state.titleEditVal + event.target.value
+      titleEditVal: event.target.value
     });
   }
 
   saveFormHandler = (event) => {
     event.preventDefault();
-    const updatedTitle = event.target.value;
-    const updatedDesc = event.target.value;
+    // const updatedTitle = event.target.value;
+    // const updatedDesc = event.target.value;
+    const updatedTitle = this.state.titleEditVal;
+    const updatedDesc = this.state.descValue;
+    const objId = this.state.id
+
+    var updateString = './api/objUpdate/' + objId;
+    var parent = this;
+
+    axios.post(updateString, {title: updatedTitle, notes: updatedDesc}).then(function(response) {
+        console.log(response);
+
+        Array.prototype.forEach.call(objs, (obj) => {
+          if (obj["_id"] == objId) {
+            obj.title = updatedTitle;
+            obj.notes = updatedDesc;
+          }
+        });
+        
+        parent.setState({
+          showModal: false,
+          objectives: objs
+        });
+    })
+
     this.setState({
       titleValue: updatedTitle,
       descValue: updatedDesc
@@ -127,6 +150,7 @@ class ObjectivesContent extends Component {
           <div className='objectives-list'>
             {this.state.objectives.map((objectiveItem, index) => {
               return <ObjectiveCard 
+                id={objectiveItem._id}
                 title={objectiveItem.title}
                 notes={objectiveItem.notes}
                 status={objectiveItem.status}
