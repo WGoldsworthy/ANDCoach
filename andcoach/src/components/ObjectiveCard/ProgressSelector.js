@@ -27,7 +27,7 @@ class ProgressSelector extends Component {
 
   render(){
     return (
-      <div>
+      <div className='progress-selector'>
         <select value={this.state.selection} onChange = {this.handleChange}>
           <option defaultValue ='none'>Please select status:</option>
           <option value ='Not Started'>Not started</option>

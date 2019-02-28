@@ -362,7 +362,16 @@ status_name {
 .Evidence {
   margin: 10px;
   text-align: center;
-  color: #009CDA; }
+  color: #2897FF; }
+  .Evidence button {
+    border: 2px solid #2897FF;
+    margin: 10px;
+    padding: 10px;
+    font-weight: bold;
+    transition: 0.2s all ease; }
+    .Evidence button:hover {
+      background: #2897FF;
+      color: #ffffff; }
 
 .objective-details {
   background: white;
@@ -373,6 +382,17 @@ status_name {
   box-shadow: 0 0 16px 0 #909090;
   border-radius: 5px;
   position: relative; }
+
+.progress-selector button {
+  border: 2px solid #2897FF;
+  margin-left: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-weight: bold;
+  transition: 0.2s all ease; }
+  .progress-selector button:hover {
+    background: #2897FF;
+    color: #ffffff; }
 
 .NoteDetails {
   background: white;
