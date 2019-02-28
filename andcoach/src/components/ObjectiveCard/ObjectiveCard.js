@@ -75,7 +75,7 @@ class ObjectiveCard extends Component {
                 }
                 
                 {
-                  this.state.editStatusClicked ? <ProgressSelector saveHandler = {this.handleSetSavedProgress}/> : null 
+                  this.state.editStatusClicked ? <ProgressSelector id={this.props.id} saveHandler = {this.handleSetSavedProgress}/> : null 
                 }
               </div>
             </div>
