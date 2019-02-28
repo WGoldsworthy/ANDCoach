@@ -54,7 +54,7 @@ class objectivesController {
         const id = req.params.id;
         Objective.findOneAndUpdate({_id: id}, {$set: {"status": req.body.status}}, function(err) {
             if (err) return res.send(500, {error: err});
-            return res.json({success: true});
+            return res.json({success: true, id: id});
         });
 
     }
