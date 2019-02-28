@@ -68,7 +68,7 @@ class ObjectivesContent extends Component {
       notes: description,
       evidence: "",
       status: "Not started",
-      user_id: cookies.get('userId')
+      user_id: cookies.get('userId'),
     }
 
     var parent = this;

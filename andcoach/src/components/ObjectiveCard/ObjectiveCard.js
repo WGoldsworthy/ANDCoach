@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProgressSelector from './ProgressSelector';
+import axios from 'axios';
 
 class ObjectiveCard extends Component {
 
@@ -23,6 +24,17 @@ class ObjectiveCard extends Component {
     this.handleEditEvidence =  this.handleEditEvidence.bind(this);
   }
 
+    componentDidMount(){
+
+      // var searchString = './api/objectives/' + this.props.id;
+      // var parent = this;
+      // axios.get(searchString).then(function(response) {
+        
+      //   // parent.setState({objectives: objs})
+      // });
+      // console.log(this.props.id);
+    }
+
 
   handleStatusEditClick = () => {
     this.setState({editStatusClicked: true, statusSaved: false}); 
@@ -33,16 +45,19 @@ class ObjectiveCard extends Component {
   }
 
   handleOpenEvidence = () => {
+    console.log(this.props.id);
     window.open(this.state.evidence);
   }
 
   handleSetupEvidence = () => {
+    console.log(this.props.id);
     this.setState({addEvidenceClicked: true, evidenceSaved: false});
   }
 
   handleSaveEvidence = (event) => {
     event.preventDefault();
     this.setState({addEvidenceClicked: false, evidenceSaved: true, editEvidenceClicked: false});
+
   }
 
   handleEvidenceChange = (event) => {
