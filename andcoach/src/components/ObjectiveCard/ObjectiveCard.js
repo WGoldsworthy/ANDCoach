@@ -6,13 +6,14 @@ class ObjectiveCard extends Component {
 
   constructor(props){
     super(props);
+    console.log(this.props.evidence);
     this.state = {
       status: this.props.status,
       editClicked: false,
       addEvidenceClicked: false,
       statusSaved: true,
       evidenceSaved: false,
-      evidence: '',
+      evidence: this.props.evidence,
     }
 
     this.handleSetSavedProgress = this.handleSetSavedProgress.bind(this);
@@ -22,6 +23,7 @@ class ObjectiveCard extends Component {
     this.handleSaveEvidence = this.handleSaveEvidence.bind(this);
     this.handleSetupEvidence = this.handleSetupEvidence.bind(this);
     this.handleEditEvidence =  this.handleEditEvidence.bind(this);
+
   }
 
     componentDidMount(){
@@ -57,7 +59,12 @@ class ObjectiveCard extends Component {
   handleSaveEvidence = (event) => {
     event.preventDefault();
     this.setState({addEvidenceClicked: false, evidenceSaved: true, editEvidenceClicked: false});
-
+    var updateString = './api/evidence/' + this.props.id;
+    console.log(this.state.evidence);
+    axios.post(updateString, {evidence: this.state.evidence}).then(function(response) {
+      console.log(response);
+    });
+    console.log(this.props.id, this.state.evidence);
   }
 
   handleEvidenceChange = (event) => {

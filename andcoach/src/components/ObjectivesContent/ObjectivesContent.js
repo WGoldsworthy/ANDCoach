@@ -32,6 +32,8 @@ class ObjectivesContent extends Component {
         objs = response.data.data;
         parent.setState({objectives: objs})
     });
+
+    console.log('pulled info');
   }
 
   addClickHandler = () => {
@@ -75,7 +77,6 @@ class ObjectivesContent extends Component {
 
     axios.post('./api/create', objective)
       .then(function(response) {
-        console.log(response);
         objs.push(response.data.objective);
         parent.setState({
           showModal: false,
@@ -114,7 +115,6 @@ class ObjectivesContent extends Component {
     var parent = this;
 
     axios.post(updateString, {title: updatedTitle, notes: updatedDesc}).then(function(response) {
-        console.log(response);
 
         Array.prototype.forEach.call(objs, (obj) => {
           if (obj["_id"] == objId) {

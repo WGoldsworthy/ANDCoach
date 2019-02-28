@@ -5,6 +5,7 @@ import UserDetails from '../UserDetails/UserDetails';
 class ObjectivesPage extends Component {
 
   render(){
+    
     return(
       <div className = "profile-content container">
         <UserDetails 
