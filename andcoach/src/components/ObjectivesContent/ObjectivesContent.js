@@ -59,7 +59,7 @@ class ObjectivesContent extends Component {
     var objective = {
       title: title,
       notes: description,
-      evidence: "None",
+      evidence: "",
       status: "Not started",
       user_id: cookies.get('userId')
     }
