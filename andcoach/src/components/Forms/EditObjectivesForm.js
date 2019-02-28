@@ -1,24 +1,29 @@
 import React from 'react';
 
-
 const ObjectiveForm = (props) => {
   return(
-    <form onSubmit={props.formSubmit}>
+    <form onSubmit={props.formSave}>
       <div className="input-container">
-        <label>Title* </label>
+        <label>Title </label>
         <div className="input-holder">
-          <input required type="text" name="title" onChange={props.titleChange}/>
+          <input 
+            type="text" 
+            onChange={props.changedTitle} 
+            defaultValue={props.titleValue}/>
           <span className="underline"></span>
         </div>
       </div>
       <div className="input-container">
-        <label>Description* </label>
+        <label>Description</label>
         <div className="input-holder">
-          <textarea required rows="6" name="description" onChange={props.descChange}/>
+          <textarea 
+            rows="6" 
+            onChange={props.descChange} 
+            defaultValue={props.descValue}/>
           <span className="underline"></span>
         </div>
       </div>
-      <button className="submit-btn">Submit</button>
+      <button className="submit-btn">Save</button>
     </form>
   );
 }

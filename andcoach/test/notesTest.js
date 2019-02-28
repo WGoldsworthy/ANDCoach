@@ -1,6 +1,6 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let app = require('../server');
+// let app = require('../server');
 let should = chai.should();
 
 chai.use(chaiHttp);
@@ -20,6 +20,7 @@ describe('POST Notes', () => {
                 .send(note)
                 .end((err, res) => {
                     res.should.have.status(200);
+                    res.body.should.have.property('success').eql(true);
                     done();
                 });
         });
@@ -38,6 +39,7 @@ describe('POST Notes', () => {
                 .send(note)
                 .end((err, res) => {
                     res.should.have.status(200);
+                    res.body.should.have.property('success').eql(true);
                     done();
                 });
         });
@@ -55,6 +57,7 @@ describe('GET Notes', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
+                    res.body.should.have.property('success').eql(true);
                     done();
                 });
         });
@@ -67,6 +70,7 @@ describe('GET Notes', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
+                    res.body.should.have.property('success').eql(true);
                     done();
                 });
         });
@@ -79,6 +83,7 @@ describe('GET Notes', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
+                    res.body.should.have.property('success').eql(true);
                     done();
                 });
         });
@@ -90,6 +95,20 @@ describe('GET Notes', () => {
                 .get('/notes/note/wrongid')
                 .end((err, res) => {
                     res.should.have.status(404);
+                    res.body.should.have.property('success').eql(false);
+                    done();
+                });
+        });
+    });
+    describe('Attempt to GET note by userId but user or notes not exist', () => {
+        it('Should return 404 response', (done) => {
+
+            chai.request("http://localhost:3001")
+                .get('/notes/notes/999')
+                .end((err, res) => {
+                    res.should.have.status(404);
+                    res.should.be.json;
+                    res.body.should.have.property('success').eql(true);
                     done();
                 });
         });
@@ -105,8 +124,9 @@ describe('DELETE Note', () => {
                 .send()
                 .end((err, res) => {
                     res.should.have.status(200);
+                    res.body.should.have.property('success').eql(true);
                     done();
                 });
         });
     });
-})
+});
