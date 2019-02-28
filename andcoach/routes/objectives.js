@@ -22,6 +22,9 @@ router.get("/objectives", objectivesController.getAllObjectives);
 // Get objectives by User id
 router.get("/objectives/:id", objectivesController.getAllObjectivesUser);
 
+// Get objectives by Obj id
+router.get("/objectivesID/:id", objectivesController.getObjectivesID);
+
 // Get objectives by status
 router.get("/objStatus/:status", objectivesController.getObjectivesStatus);
 
