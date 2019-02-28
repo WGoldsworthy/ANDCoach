@@ -25,8 +25,6 @@ class ObjectiveCard extends Component {
 
   handleStatusEditClick = () => {
     this.setState({editClicked: true, statusSaved: false}); 
-    console.log('clicked edit button');
-    console.log(this.state.addEvidenceClicked, this.state.evidence, this.state.evidenceSaved);
   }
 
   handleSetSavedProgress = (props) => {
@@ -35,23 +33,19 @@ class ObjectiveCard extends Component {
 
   handleOpenEvidence = () => {
     window.open(this.state.evidence);
-    console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   handleSetupEvidence = () => {
     this.setState({addEvidenceClicked: true, evidenceSaved: false});
-    console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   handleSaveEvidence = (event) => {
     event.preventDefault();
     this.setState({addEvidenceClicked: false, evidenceSaved: true});
-    console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   handleEvidenceChange = (event) => {
     this.setState({evidence: event.target.value});
-    //console.log(this.state.evidence, this.state.addEvidenceClicked, this.state.evidenceSaved);
   }
 
   render() {

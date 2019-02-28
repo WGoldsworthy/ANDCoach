@@ -5,7 +5,6 @@ class ProgressSelector extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       selection: '',
       statusChanged: false,
@@ -17,15 +16,12 @@ class ProgressSelector extends Component {
   handleChange(event) {
     this.setState({selection: event.target.value, statusChanged: true});
     if (event.target.value==="Please select status:") this.setState({statusChanged: false});
-    console.log(event.target.value);
   }
 
   handleSaveClick = (props) => {
     this.props.saveHandler({selection: this.state.selection});
-    console.log('saved new status');
     var updateString = './api/objUpdateStatus/' + this.props.id;
     axios.post(updateString, {status: this.state.selection}).then(function(response) {
-      console.log(response)
     });
   }
 
