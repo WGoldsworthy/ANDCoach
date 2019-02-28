@@ -23,15 +23,36 @@
 .input-container
   margin-bottom: 15px
   text-align: justify
-  position: relative
   overflow: hidden
 
   input,
   textarea
     width: 100%
-    border: solid $greyscale-2
+    border: solid #cccccc
     border-width: 0 0 2px 0
-    border-color: $brand-color
+    box-sizing: border-box
+    position: relative
+    vertical-align: bottom 
+
+    &:focus
+      outline: 0
+
+    &:focus+.underline
+      transform: scale(1)  
+
+  .input-holder
+    position: relative    
+
+  .underline
+    position: absolute
+    display: inline-block
+    background: $brand-color
+    height: 2px
+    bottom: 0
+    left: 0
+    width: 100%
+    transform: scale(0, 1)
+    transition: all 0.5s linear
 
   input
     padding: 5px
