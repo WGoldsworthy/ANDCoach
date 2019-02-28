@@ -197,6 +197,8 @@ img {
   .nav a {
     text-decoration: none;
     color: #333333; }
+    .nav a.active {
+      color: #2897FF; }
 
 .modal {
   position: fixed;
