@@ -11,7 +11,6 @@ const noteModal = (props) => {
           onClick={props.closeNoteModal} >
         </span>
         <NoteForm 
-          noteTitleChange={props.updateNoteTitle}
           noteDescChange={props.updateNoteDesc}
           noteFromSubmit={props.submitNoteForm}/>
       </div>

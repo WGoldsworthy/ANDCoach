@@ -34,7 +34,7 @@ class NotesController {
         let note = new Note(req.body);
         note.save(err => {
             if (err) return res.json({success: false, error: err});
-            return res.json({success: true});
+            return res.json({success: true, note: note});
         })
     }
 

@@ -14,7 +14,8 @@ class NotesPage extends Component {
         uPic={this.props.uPic}
         uEmail={this.props.uEmail}
         />
-        <NotesContent/>
+        <NotesContent 
+          userId={this.props.userId}/>
       </div>
     );
   }
