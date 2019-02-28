@@ -6,7 +6,7 @@ class ObjectiveCard extends Component {
   constructor(props){
     super(props);
     this.state = {
-      status: 'Not Started',
+      status: this.props.status,
       editClicked: false,
       addEvidenceClicked: false,
       statusSaved: true,

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ObjectiveForm = (props) => {
+const EditObjectivesForm = (props) => {
   return(
-    <form onSubmit={props.formSave}>
+    <form onSubmit={props.formSubmit}>
       <div className="input-container">
         <label>Title </label>
         <div className="input-holder">
@@ -28,4 +28,4 @@ const ObjectiveForm = (props) => {
   );
 }
 
-export default ObjectiveForm;
+export default EditObjectivesForm;
