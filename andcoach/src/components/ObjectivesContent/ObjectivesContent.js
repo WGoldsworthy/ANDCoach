@@ -33,7 +33,7 @@ class ObjectivesContent extends Component {
         parent.setState({objectives: objs})
     });
 
-
+    console.log('pulled info');
   }
 
   addClickHandler = () => {
@@ -148,7 +148,7 @@ class ObjectivesContent extends Component {
         </button>
         {this.state.objectives.length ? 
           <div className='objectives-list'>
-            {(this.state.objectives).reverse().map((objectiveItem, index) => {
+            {this.state.objectives.map((objectiveItem, index) => {
               return <ObjectiveCard 
                 id={objectiveItem._id}
                 title={objectiveItem.title}
