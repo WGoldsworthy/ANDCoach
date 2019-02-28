@@ -14,6 +14,7 @@ class ObjectivesPage extends Component {
         />
         <ObjectivesContent
           showModal={this.props.showModal}
+          userId={this.props.userId}
         />
       </div>
     );

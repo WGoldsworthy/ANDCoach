@@ -24,6 +24,7 @@ class NotesController {
         const id = req.params.id;
         Note.find({user_id: id}, (err, objs) => {
             if (err) return res.json({success: false, error: err});
+            if (!objs.length) return res.status(404).json({success: true, error: err});
             return res.json({success: true, data: objs})
         });
     }
@@ -42,7 +43,7 @@ class NotesController {
         const id = req.params.id;
 
         Note.findOneAndUpdate({_id: id}, {$set: {"body": req.body.body}}, function(err, note) {
-            if (err) return res.send(500, {error: err});
+            if (err) return res.send(500, {success: false, error: err});
             return res.json({success: true});
         });
 

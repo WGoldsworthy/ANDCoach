@@ -7,16 +7,8 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 var objs = [];
-var searchString = './api/objectives/' + cookies.get('userId');
-
-axios.get(searchString).then(function(response) {
-  if (response.data.data.length !== 0) {
-    objs = response.data.data;
-  }
-});
 
 class ObjectivesContent extends Component {
-
   state = {
     newObj: false,
     editObj: false,
@@ -27,7 +19,20 @@ class ObjectivesContent extends Component {
     titleEditVal: '',
     descEditVal: '',
     titleUpdatedVal: '',
-    descUpdatedVal: ''
+    descUpdatedVal: '',
+    userId: null
+  }
+
+  componentDidMount() {
+
+    var searchString = './api/objectives/' + this.props.userId;
+    var parent = this;
+
+    axios.get(searchString).then(function(response) {
+        console.log(response);
+        objs = response.data.data;
+        parent.setState({objectives: objs})
+    });
   }
 
   addClickHandler = () => {
@@ -72,6 +77,7 @@ class ObjectivesContent extends Component {
 
     axios.post('./api/create', objective)
       .then(function(response) {
+        console.log(response);
         objs.push(response.data.objective);
         parent.setState({
           showModal: false,
@@ -92,10 +98,10 @@ class ObjectivesContent extends Component {
   }
 
   titleEditChangeHandler = (event) => {
-    // console.log(event.target.value);
-    // this.setState({
-    //   titleUpdatedVal: this.state.titleEditVal + event.target.value
-    // });
+    console.log(event.target.value);
+    this.setState({
+      titleUpdatedVal: this.state.titleEditVal + event.target.value
+    });
   }
 
   saveFormHandler = (event) => {
@@ -119,18 +125,23 @@ class ObjectivesContent extends Component {
           className="add"
           onClick={this.addClickHandler}>
         </button>
-        <div className='objectives-list'>
-        {this.state.objectives.map((objectiveItem, index) => {
-          console.log(objectiveItem);
-          return <ObjectiveCard 
-            title={objectiveItem}
-            notes={objectiveItem.notes}
-            status={objectiveItem.status}
-            evidence={objectiveItem.evidence}
-            editClick={this.objEditClickHandler.bind(this, objectiveItem)}
-            key={index}/>
-          })}
-        </div>
+        {this.state.objectives.length ? 
+          <div className='objectives-list'>
+            {this.state.objectives.map((objectiveItem, index) => {
+              return <ObjectiveCard 
+                title={objectiveItem.title}
+                notes={objectiveItem.notes}
+                status={objectiveItem.status}
+                evidence={objectiveItem.evidence}
+                editClick={this.objEditClickHandler.bind(this, objectiveItem)}
+                key={index}/>
+            })}
+          </div> :
+          <div className="no-list">
+            <h2>You have not yet added any objectives</h2>
+          </div>    
+        }
+
         {modal ? 
           <Modal 
             modalQuit={this.closeClickHandler}

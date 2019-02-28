@@ -225,18 +225,33 @@ img {
 .input-container {
   margin-bottom: 15px;
   text-align: justify;
-  position: relative;
   overflow: hidden; }
   .input-container input,
   .input-container textarea {
     width: 100%;
-    border: solid #323232;
+    border: solid #cccccc;
     border-width: 0 0 2px 0;
-    border-color: #FF323C;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    position: relative;
+    vertical-align: bottom; }
     .input-container input:focus,
     .input-container textarea:focus {
       outline: 0; }
+    .input-container input:focus + .underline,
+    .input-container textarea:focus + .underline {
+      transform: scale(1); }
+  .input-container .input-holder {
+    position: relative; }
+  .input-container .underline {
+    position: absolute;
+    display: inline-block;
+    background: #FF323C;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform: scale(0, 1);
+    transition: all 0.5s linear; }
   .input-container input {
     padding: 5px; }
 

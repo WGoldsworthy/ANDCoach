@@ -7,13 +7,15 @@ const ObjectiveForm = (props) => {
       <div className="input-container">
         <label>Title* </label>
         <div className="input-holder">
-          <textarea required type="text" name="Test" onChange={props.titleChange}/>
+          <input required type="text" name="title" onChange={props.titleChange}/>
+          <span className="underline"></span>
         </div>
       </div>
       <div className="input-container">
         <label>Description* </label>
         <div className="input-holder">
-          <textarea required rows="6" desc="this is description" onChange={props.descChange}/>
+          <textarea required rows="6" name="description" onChange={props.descChange}/>
+          <span className="underline"></span>
         </div>
       </div>
       <button className="submit-btn">Submit</button>

@@ -15,6 +15,7 @@ class App extends Component {
     
   constructor(props) {
     super(props);
+    document.title = "AND Coach"
 
     this.state = {
       loggedIn: false,
@@ -22,6 +23,7 @@ class App extends Component {
       lastName: null,
       profilePic: null,
       email: null,
+      userId: null,
     }
   }
 
@@ -38,6 +40,7 @@ class App extends Component {
             lastName: response.data.user.lastName,
             profilePic: response.data.user.imageUrl,
             email: response.data.user.email,
+            userId: response.data.user.userId
           });
 
         })
@@ -79,6 +82,7 @@ render() {
             lastName: response.profileObj.familyName,
             profilePic: response.profileObj.imageUrl,
             email: response.profileObj.email,
+            userId: response.googleId
         });
       }
     }
@@ -89,41 +93,40 @@ render() {
 
     return (
       <div className="App">
-      <Router>
-        <div>
-          {!this.state.loggedIn ?
-                <LoginContent
-                  authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
-                  loginText="Google Login"
-                  loginSuccess={responseGoogleSuccess}
-                  loginFail={responseGoogleFail}/> 
-          :
-            <div>
-              <Route exact path="/" render={() => (<Redirect to="/objectives"/>)}/>
-              <div className="user-profile">
-                
-                  <Header />
-                    <Route path="/objectives"
-                      render={(routeProps) => (
-                        <ObjectivesPage {...routeProps}
-                        uName={this.state.firstName}
-                        uPic={this.state.profilePic}
-                        uEmail={this.state.email} />
-                      )}
-                    />
-                    <Route path="/notes" 
-                      render={(routeProps) => (
-                        <NotesPage {...routeProps} 
-                        uName={this.state.firstName}
-                        uPic={this.state.profilePic}
-                        uEmail={this.state.email} />
-                      )}
+        <Router>
+          <div>
+            {!this.state.loggedIn ?
+              <LoginContent
+                authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
+                loginText="Google Login"
+                loginSuccess={responseGoogleSuccess}
+                loginFail={responseGoogleFail}/> :
+              <div>
+                <Route exact path="/" render={() => (<Redirect to="/objectives"/>)}/>
+                  <div className="user-profile">
+                    <Header />
+                      <Route path="/objectives"
+                        render={(routeProps) => (
+                          <ObjectivesPage {...routeProps}
+                            uName={this.state.firstName}
+                            uPic={this.state.profilePic}
+                            uEmail={this.state.email}
+                            userId={this.state.userId} />
+                        )}
                       />
-            </div>
-          </div> 
-          }
-        </div>
-      </Router>
+                      <Route path="/notes" 
+                        render={(routeProps) => (
+                          <NotesPage {...routeProps} 
+                          uName={this.state.firstName}
+                          uPic={this.state.profilePic}
+                          uEmail={this.state.email} />
+                        )}
+                    />
+                </div>
+              </div> 
+            }
+          </div>
+        </Router>
       </div>
     );
   }
