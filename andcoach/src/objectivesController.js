@@ -19,6 +19,15 @@ class objectivesController {
         });
     }
 
+    // Get objectives by user_id
+    static getObjectivesID(req, res) {
+        const id = req.params.id;
+        Objective.find({_id: id}, (err, objs) => {
+            if (err) return res.json({success: false, error: err});
+            return res.json({success: true, data: objs})
+        });
+    }
+
 
     // Get objectives by status
     static getObjectivesStatus(req, res) {
