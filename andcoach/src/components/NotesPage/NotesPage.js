@@ -8,7 +8,7 @@ class NotesPage extends Component {
   }
   render() {
     return (
-      <div className='ObjectivesPage'>
+      <div className="profile-content container">
         <UserDetails 
         uName={this.props.uName}
         uPic={this.props.uPic}

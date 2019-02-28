@@ -78,14 +78,21 @@ button {
     font-size: 24px; }
     button.add:before {
       content: ""; }
-  button.edit {
+  button.edit, button.edit-obj {
     font-size: 0;
     position: relative;
     font-family: "FontAwesome"; }
-    button.edit:before {
+    button.edit:before, button.edit-obj:before {
       content: "";
-      color: #2897FF;
-      font-size: 14px; }
+      color: #2897FF; }
+  button.edit:before {
+    font-size: 14px; }
+  button.edit-obj {
+    position: absolute;
+    top: 5px;
+    right: 5px; }
+    button.edit-obj:before {
+      font-size: 20px; }
 
 body {
   font-family: "SofiaProLight", Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -190,8 +197,6 @@ img {
   .nav a {
     text-decoration: none;
     color: #333333; }
-    .nav a:hover {
-      color: #ffffff; }
 
 .modal {
   position: fixed;
@@ -218,14 +223,33 @@ img {
 .input-container {
   margin-bottom: 15px;
   text-align: justify;
-  position: relative;
   overflow: hidden; }
   .input-container input,
   .input-container textarea {
     width: 100%;
-    border: solid #323232;
+    border: solid #cccccc;
     border-width: 0 0 2px 0;
-    border-color: #FF323C; }
+    box-sizing: border-box;
+    position: relative;
+    vertical-align: bottom; }
+    .input-container input:focus,
+    .input-container textarea:focus {
+      outline: 0; }
+    .input-container input:focus + .underline,
+    .input-container textarea:focus + .underline {
+      transform: scale(1); }
+  .input-container .input-holder {
+    position: relative; }
+  .input-container .underline {
+    position: absolute;
+    display: inline-block;
+    background: #FF323C;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform: scale(0, 1);
+    transition: all 0.5s linear; }
   .input-container input {
     padding: 5px; }
 
@@ -345,7 +369,8 @@ status_name {
   margin-bottom: 10px;
   color: black;
   box-shadow: 0 0 16px 0 #909090;
-  border-radius: 5px; }
+  border-radius: 5px;
+  position: relative; }
 
 .NoteDetails {
   background: white;

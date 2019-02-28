@@ -11,16 +11,6 @@ import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { Redirect } from 'react-router';
 const cookies = new Cookies();
 
-var checkSession = () => {
-  axios.get("./users/checkSession").then(function(response) {
-    if (response.data.loggedIn) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-}
-
 class App extends Component {
     
   constructor(props) {
@@ -35,10 +25,7 @@ class App extends Component {
       email: null,
       userId: null,
     }
-
   }
-
-
 
   checkSess() {
     var parent = this;
@@ -106,42 +93,40 @@ render() {
 
     return (
       <div className="App">
-      <Router>
-        <div>
-          {!this.state.loggedIn ?
-                <LoginContent
-                  authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
-                  loginText="Google Login"
-                  loginSuccess={responseGoogleSuccess}
-                  loginFail={responseGoogleFail}/> 
-          :
-            <div>
-              <Route exact path="/" render={() => (<Redirect to="/objectives"/>)}/>
-              <div className="user-profile">
-                
-                  <Header />
-                    <Route path="/objectives"
-                      render={(routeProps) => (
-                        <ObjectivesPage {...routeProps}
-                        uName={this.state.firstName}
-                        uPic={this.state.profilePic}
-                        uEmail={this.state.email}
-                        userId={this.state.userId} />
-                      )}
-                    />
-                    <Route path="/notes" 
-                      render={(routeProps) => (
-                        <NotesPage {...routeProps} 
-                        uName={this.state.firstName}
-                        uPic={this.state.profilePic}
-                        uEmail={this.state.email} />
-                      )}
+        <Router>
+          <div>
+            {!this.state.loggedIn ?
+              <LoginContent
+                authId="235133504684-fjvf8vdusr8sjgaea7hs7ijbdu4kjgua.apps.googleusercontent.com"
+                loginText="Google Login"
+                loginSuccess={responseGoogleSuccess}
+                loginFail={responseGoogleFail}/> :
+              <div>
+                <Route exact path="/" render={() => (<Redirect to="/objectives"/>)}/>
+                  <div className="user-profile">
+                    <Header />
+                      <Route path="/objectives"
+                        render={(routeProps) => (
+                          <ObjectivesPage {...routeProps}
+                            uName={this.state.firstName}
+                            uPic={this.state.profilePic}
+                            uEmail={this.state.email}
+                            userId={this.state.userId} />
+                        )}
                       />
-            </div>
-          </div> 
-          }
-        </div>
-      </Router>
+                      <Route path="/notes" 
+                        render={(routeProps) => (
+                          <NotesPage {...routeProps} 
+                          uName={this.state.firstName}
+                          uPic={this.state.profilePic}
+                          uEmail={this.state.email} />
+                        )}
+                    />
+                </div>
+              </div> 
+            }
+          </div>
+        </Router>
       </div>
     );
   }

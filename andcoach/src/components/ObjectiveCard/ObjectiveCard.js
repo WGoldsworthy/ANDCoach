@@ -120,10 +120,13 @@ class ObjectiveCard extends Component {
               } 
             </div>
           </div>
+          <button
+            className="edit-obj"
+            onClick={this.props.editClick}>
+              edit
+          </button>
         </div>
-        
       </li>
-
     );
   }
 }
