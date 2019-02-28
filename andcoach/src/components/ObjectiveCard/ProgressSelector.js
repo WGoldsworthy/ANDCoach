@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class ProgressSelector extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       selection: '',
       statusChanged: false,
@@ -21,6 +23,10 @@ class ProgressSelector extends Component {
   handleSaveClick = (props) => {
     this.props.saveHandler({selection: this.state.selection});
     console.log('saved new status');
+    var updateString = './api/objUpdateStatus/' + this.props.id;
+    axios.post(updateString, {status: this.state.selection}).then(function(response) {
+      console.log(response)
+    });
   }
 
   render(){

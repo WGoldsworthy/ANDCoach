@@ -6,7 +6,7 @@ class ObjectiveCard extends Component {
   constructor(props){
     super(props);
     this.state = {
-      status: 'Not Started',
+      status: this.props.status,
       editClicked: false,
       addEvidenceClicked: false,
       statusSaved: true,
@@ -76,7 +76,7 @@ class ObjectiveCard extends Component {
                 }
                 
                 {
-                  this.state.editClicked ? <ProgressSelector saveHandler = {this.handleSetSavedProgress}/> : null 
+                  this.state.editClicked ? <ProgressSelector id={this.props.id} saveHandler = {this.handleSetSavedProgress}/> : null 
                 }
               </div>
             </div>
