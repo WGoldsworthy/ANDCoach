@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class NoteCard extends Component {
   render() {
     return (
-      <li className='objective-card'>
+      <li className='objective-card fade-in-up'>
         <div className='objective-details'>
           <h3>{this.props.date}</h3>
           <h2>{this.props.title}</h2>
