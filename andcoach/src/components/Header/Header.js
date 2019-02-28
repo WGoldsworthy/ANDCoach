@@ -4,10 +4,6 @@ import { NavLink } from 'react-router-dom'
 
 
 class Header extends Component {
-  state = {
-   menuItems: [
-    ],
-  }
 
   render() {
     return (

@@ -106,8 +106,8 @@ render() {
                   <div className="user-profile">
                     <Header />
                       <Route path="/objectives"
-                        render={(routeProps) => (
-                          <ObjectivesPage {...routeProps}
+                        render={() => (
+                          <ObjectivesPage 
                             uName={this.state.firstName}
                             uPic={this.state.profilePic}
                             uEmail={this.state.email}
@@ -115,8 +115,8 @@ render() {
                         )}
                       />
                       <Route path="/notes" 
-                        render={(routeProps) => (
-                          <NotesPage {...routeProps} 
+                        render={() => (
+                          <NotesPage
                           uName={this.state.firstName}
                           uPic={this.state.profilePic}
                           uEmail={this.state.email}

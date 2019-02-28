@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import ProgressSelector from './ProgressSelector';
+import axios from 'axios';
 
 class ObjectiveCard extends Component {
 
   constructor(props){
     super(props);
+    // console.log(this.props.evidence);
+
+    var saved = false;
+    // console.log(this.props.evidence)
+    if (this.props.evidence !== "") {
+      saved = true;
+    }
     this.state = {
       status: this.props.status,
       editClicked: false,
       addEvidenceClicked: false,
       statusSaved: true,
-      evidenceSaved: false,
-      evidence: '',
+      evidenceSaved: saved,
+      evidence: this.props.evidence,
     }
 
     this.handleSetSavedProgress = this.handleSetSavedProgress.bind(this);
@@ -21,7 +29,19 @@ class ObjectiveCard extends Component {
     this.handleSaveEvidence = this.handleSaveEvidence.bind(this);
     this.handleSetupEvidence = this.handleSetupEvidence.bind(this);
     this.handleEditEvidence =  this.handleEditEvidence.bind(this);
+    // console.log(this.state.evidence);
   }
+
+    componentDidMount(){
+
+      // var searchString = './api/objectives/' + this.props.id;
+      // var parent = this;
+      // axios.get(searchString).then(function(response) {
+        
+      //   // parent.setState({objectives: objs})
+      // });
+      // console.log(this.props.id);
+    }
 
 
   handleStatusEditClick = () => {
@@ -33,16 +53,28 @@ class ObjectiveCard extends Component {
   }
 
   handleOpenEvidence = () => {
+    console.log(this.props.id);
+    // if (!this.state.evidence.match(/^https?:\/\//i)) {
+    //   var evidenceText = 'http://' + this.state.evidence
+    //     this.setState({evidence: evidenceText});
+    // }
     window.open(this.state.evidence);
   }
 
   handleSetupEvidence = () => {
+    //console.log(this.props.id);
     this.setState({addEvidenceClicked: true, evidenceSaved: false});
   }
 
   handleSaveEvidence = (event) => {
     event.preventDefault();
     this.setState({addEvidenceClicked: false, evidenceSaved: true, editEvidenceClicked: false});
+    var updateString = './api/evidence/' + this.props.id;
+   // console.log(this.state.evidence);
+    axios.post(updateString, {evidence: this.state.evidence}).then(function(response) {
+      //console.log(response);
+    });
+    // console.log(this.props.id, this.state.evidence);
   }
 
   handleEvidenceChange = (event) => {
@@ -75,7 +107,7 @@ class ObjectiveCard extends Component {
                 }
                 
                 {
-                  this.state.editStatusClicked ? <ProgressSelector saveHandler = {this.handleSetSavedProgress}/> : null 
+                  this.state.editStatusClicked ? <ProgressSelector id={this.props.id} saveHandler = {this.handleSetSavedProgress}/> : null 
                 }
               </div>
             </div>
@@ -87,7 +119,6 @@ class ObjectiveCard extends Component {
             Evidence:&nbsp;
               {this.state.evidenceSaved && !this.state.evidence.trim()=="" && !this.state.editEvidenceClicked ? 
               <div>
-                  Submitted
                   {!this.state.editEvidenceClicked ?
                   <div>
                     <button onClick={this.handleOpenEvidence}>Open Evidence</button>
@@ -100,20 +131,20 @@ class ObjectiveCard extends Component {
               :
                 this.state.addEvidenceClicked ?
                   <form onSubmit={this.handleSaveEvidence}>
-                    <input type='link' onChange={this.handleEvidenceChange}></input>
+                    <input type='text' onChange={this.handleEvidenceChange}></input>
                     <button type='submit'>Save Evidence</button>
                   </form>
                 : 
                   !this.state.editEvidenceClicked 
                   ?
                     <div>
-                      Not Submitted <button onClick={this.handleSetupEvidence}>Add Evidence</button>
+                      <button onClick={this.handleSetupEvidence}>Add Evidence</button>
                     </div> 
                   : null
               }
               {this.state.editEvidenceClicked ?
                 <form onSubmit={this.handleSaveEvidence}>
-                  <input type='link' onChange={this.handleEvidenceChange} value={this.state.evidence}></input>
+                  <input type='text' onChange={this.handleEvidenceChange} value={this.state.evidence}></input>
                   <button type='submit'>Save Evidence</button>
                 </form>
               : null

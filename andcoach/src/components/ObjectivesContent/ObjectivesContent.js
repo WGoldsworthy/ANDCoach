@@ -32,6 +32,8 @@ class ObjectivesContent extends Component {
         objs = response.data.data;
         parent.setState({objectives: objs})
     });
+
+
   }
 
   addClickHandler = () => {
@@ -68,14 +70,13 @@ class ObjectivesContent extends Component {
       notes: description,
       evidence: "",
       status: "Not started",
-      user_id: cookies.get('userId')
+      user_id: cookies.get('userId'),
     }
 
     var parent = this;
 
     axios.post('./api/create', objective)
       .then(function(response) {
-        console.log(response);
         objs.push(response.data.objective);
         parent.setState({
           showModal: false,
@@ -114,7 +115,6 @@ class ObjectivesContent extends Component {
     var parent = this;
 
     axios.post(updateString, {title: updatedTitle, notes: updatedDesc}).then(function(response) {
-        console.log(response);
 
         Array.prototype.forEach.call(objs, (obj) => {
           if (obj["_id"] == objId) {
@@ -148,7 +148,7 @@ class ObjectivesContent extends Component {
         </button>
         {this.state.objectives.length ? 
           <div className='objectives-list'>
-            {this.state.objectives.map((objectiveItem, index) => {
+            {(this.state.objectives).reverse().map((objectiveItem, index) => {
               return <ObjectiveCard 
                 id={objectiveItem._id}
                 title={objectiveItem.title}

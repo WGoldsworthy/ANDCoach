@@ -9,6 +9,22 @@ class objectivesController {
         });
     }
 
+    // Create note
+    static createObjective(req, res) {
+        let objective = new Objective(req.body);
+/*        const {title, notes, evidence, status, user_id} = req.body;
+        objective.title = title;
+        objective.notes = notes;
+        objective.evidence = evidence;
+        objective.status = status;
+        objective.user_id = user_id; // Google Id*/
+        objective.save(err => {
+            if (err) return res.json({success: false, error: err});
+            return res.json({success: true, objective: objective});
+
+        })
+    }
+
 
     // Get objectives by user_id
     static getAllObjectivesUser(req, res) {
@@ -19,7 +35,7 @@ class objectivesController {
         });
     }
 
-    // Get objectives by user_id
+    // Get objectives by id
     static getObjectivesID(req, res) {
         const id = req.params.id;
         Objective.find({_id: id}, (err, objs) => {
@@ -58,10 +74,20 @@ class objectivesController {
 
     }
 
-    // Update objectives title and description
+    // Update objectives status
     static updateObjectiveStatus(req, res) {
         const id = req.params.id;
         Objective.findOneAndUpdate({_id: id}, {$set: {"status": req.body.status}}, function(err) {
+            if (err) return res.send(500, {error: err});
+            return res.json({success: true, id: id});
+        });
+
+    }
+
+    // Update evidence
+    static updateEvidence(req, res) {
+        const id = req.params.id;
+        Objective.findOneAndUpdate({_id: id}, {$set: {"evidence": req.body.evidence}}, function(err) {
             if (err) return res.send(500, {error: err});
             return res.json({success: true, id: id});
         });
