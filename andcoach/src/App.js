@@ -5,8 +5,8 @@ import LoginContent from './components/Login/Login';
 import Cookies from 'universal-cookie';
 import ObjectivesPage from './components/ObjectivesPage/ObjectivesPage';
 import Header from './components/Header/Header';
-
 import NotesPage from './components/NotesPage/NotesPage';
+
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { Redirect } from 'react-router';
 const cookies = new Cookies();

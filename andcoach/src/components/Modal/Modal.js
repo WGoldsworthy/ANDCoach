@@ -3,8 +3,8 @@ import ObjectiveForm from '../Forms/ObjectiveForm';
 import EditObjectiveForm from '../Forms/EditObjectivesForm';
 
 const modal = (props) => {
-  const newObjForm = props.newObj
-  const editObjForm = props.editObj
+  const newObjForm = props.newObj;
+  const editObjForm = props.editObj;
   return(
     <div className="modal">
       <div className="modal-content">
@@ -19,13 +19,13 @@ const modal = (props) => {
             formSubmit={props.submitForm}/> : null
         }
         {editObjForm ? 
-         <EditObjectiveForm
-          titleChange={props.updateTitle}
-          descChange={props.updateDesc}
-          formSubmit={props.submitForm}
-          titleValue={props.titleVal}
-          descValue={props.descVal}
-          changedTitle={props.editedTitle}/> : null
+          <EditObjectiveForm
+            titleChange={props.updateTitle}
+            descChange={props.updateDesc}
+            formSubmit={props.submitForm}
+            titleValue={props.titleVal}
+            descValue={props.descVal}
+            changedTitle={props.editedTitle}/> : null
         }
       </div>
     </div>

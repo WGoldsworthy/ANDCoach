@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NoteCard from '../NoteCard/NoteCard.js';
+import NotesContent from '../NotesContent/NotesContent';
 import UserDetails from '../UserDetails/UserDetails.js';
 
 class NotesPage extends Component {
@@ -14,13 +14,7 @@ class NotesPage extends Component {
         uPic={this.props.uPic}
         uEmail={this.props.uEmail}
         />
-        <div className='ObjectivesList'>
-        Your Meeting Notes
-          <NoteCard />
-          <NoteCard />
-          <NoteCard />
-          <NoteCard />
-        </div>
+        <NotesContent/>
       </div>
     );
   }

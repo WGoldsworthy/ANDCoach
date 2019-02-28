@@ -18,10 +18,10 @@ class Header extends Component {
           </div>
           <ul className="nav">
               <li>
-                <NavLink to="/objectives" activeStyle={{ color: '#2897FF' }} activeClassName="active">Objectives</NavLink>
+                <NavLink to="/objectives" activeClassName="active">Objectives</NavLink>
               </li>
               <li>
-                <NavLink to="/notes" activeStyle={{ color: '#2897FF' }} activeClassName="active">Notes</NavLink>
+                <NavLink to="/notes" activeClassName="active">Notes</NavLink>
               </li>
           </ul>
         </div>
