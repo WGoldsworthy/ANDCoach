@@ -20,15 +20,16 @@ class ObjectiveCard extends Component {
     this.handleEvidenceChange = this.handleEvidenceChange.bind(this);
     this.handleSaveEvidence = this.handleSaveEvidence.bind(this);
     this.handleSetupEvidence = this.handleSetupEvidence.bind(this);
+    this.handleEditEvidence =  this.handleEditEvidence.bind(this);
   }
 
 
   handleStatusEditClick = () => {
-    this.setState({editClicked: true, statusSaved: false}); 
+    this.setState({editStatusClicked: true, statusSaved: false}); 
   }
 
   handleSetSavedProgress = (props) => {
-    this.setState({status: props.selection, statusSaved: true, editClicked: false});
+    this.setState({status: props.selection, statusSaved: true, editStatusClicked: false});
   }
 
   handleOpenEvidence = () => {
@@ -41,11 +42,15 @@ class ObjectiveCard extends Component {
 
   handleSaveEvidence = (event) => {
     event.preventDefault();
-    this.setState({addEvidenceClicked: false, evidenceSaved: true});
+    this.setState({addEvidenceClicked: false, evidenceSaved: true, editEvidenceClicked: false});
   }
 
   handleEvidenceChange = (event) => {
     this.setState({evidence: event.target.value});
+  }
+
+  handleEditEvidence = (event) => {
+    this.setState({editEvidenceClicked: true});
   }
 
   render() {
@@ -70,7 +75,7 @@ class ObjectiveCard extends Component {
                 }
                 
                 {
-                  this.state.editClicked ? <ProgressSelector id={this.props.id} saveHandler = {this.handleSetSavedProgress}/> : null 
+                  this.state.editStatusClicked ? <ProgressSelector saveHandler = {this.handleSetSavedProgress}/> : null 
                 }
               </div>
             </div>
@@ -80,24 +85,38 @@ class ObjectiveCard extends Component {
             </div>
             <div className = "Evidence">
             Evidence:&nbsp;
-              {this.state.evidenceSaved ? 
+              {this.state.evidenceSaved && !this.state.evidence.trim()=="" && !this.state.editEvidenceClicked ? 
               <div>
                   Submitted
-                <div>
-                  <button onClick={this.handleOpenEvidence}>Open Evidence</button>
-                  <button onClick={this.editEvidence}>Edit Evidence</button>
-                </div>
+                  {!this.state.editEvidenceClicked ?
+                  <div>
+                    <button onClick={this.handleOpenEvidence}>Open Evidence</button>
+                    <button onClick={this.handleEditEvidence}>Edit Evidence</button>
+                </div> :
+                    null
+                  }
+                
               </div>
               :
-              
                 this.state.addEvidenceClicked ?
                   <form onSubmit={this.handleSaveEvidence}>
                     <input type='link' onChange={this.handleEvidenceChange}></input>
                     <button type='submit'>Save Evidence</button>
                   </form>
-              : <div>
-                Not Submitted <button onClick={this.handleSetupEvidence}>ADD Evidence</button>
-              </div> 
+                : 
+                  !this.state.editEvidenceClicked 
+                  ?
+                    <div>
+                      Not Submitted <button onClick={this.handleSetupEvidence}>Add Evidence</button>
+                    </div> 
+                  : null
+              }
+              {this.state.editEvidenceClicked ?
+                <form onSubmit={this.handleSaveEvidence}>
+                  <input type='link' onChange={this.handleEvidenceChange} value={this.state.evidence}></input>
+                  <button type='submit'>Save Evidence</button>
+                </form>
+              : null
               } 
             </div>
           </div>

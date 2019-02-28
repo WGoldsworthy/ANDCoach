@@ -7,7 +7,7 @@ const ObjectiveSchema = new Schema(
   {
     title: { type: String, unique: true, required: true },
     notes: { type: String, required: true },
-    evidence: { type: String, required: true },
+    evidence: { type: String, required: false },
     status: { type: String, required: true },
     user_id: { type: String, required: true }
   },
