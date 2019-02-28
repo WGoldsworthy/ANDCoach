@@ -87,7 +87,6 @@ class ObjectivesContent extends Component {
   }
 
   objEditClickHandler = (objectiveItem) => {
-    console.log(objectiveItem);
     this.setState({
       newObj: false,
       editObj: true,
