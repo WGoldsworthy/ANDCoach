@@ -79,7 +79,18 @@ status_name
 .Evidence
   margin: 10px
   text-align: center
-  color: #009CDA
+  color: $brand-color-2
+
+  button
+    border: 2px solid $brand-color-2
+    margin: 10px
+    padding: 10px
+    font-weight: bold
+    transition: 0.2s all ease
+    
+    &:hover
+      background: $brand-color-2
+      color: $white
 
 .objective-details
   background: white
@@ -90,7 +101,21 @@ status_name
   box-shadow: 0 0 16px 0 #909090
   border-radius: 5px
   position: relative
+  
+.progress-selector
+  button
+    border: 2px solid $brand-color-2
+    margin-left: 10px
+    padding-left: 15px
+    padding-right: 15px
+    font-weight: bold
+    transition: 0.2s all ease
+    
+    &:hover
+      background: $brand-color-2
+      color: $white
 
+  
 .NoteDetails
   background: white
   max-width: 700px

@@ -35,7 +35,7 @@ class objectivesController {
         });
     }
 
-    // Get objectives by user_id
+    // Get objectives by id
     static getObjectivesID(req, res) {
         const id = req.params.id;
         Objective.find({_id: id}, (err, objs) => {
