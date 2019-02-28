@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
 import NoteCard from '../NoteCard/NoteCard';
 import NoteModal from '../Modal/NoteModal';
-// import axios from 'axios';
+import axios from 'axios';
+import Cookies from "universal-cookie";
 
-class ObjectivesContent extends Component {
+const cookies = new Cookies();
+
+var nts = [];
+
+class NotesContent extends Component {
 
   state = {
     showNoteModal: false,
+    notes: nts,
     noteTitleValue: '',
     noteDescValue: '',
     noteTitleUpdateVal: '',
     noteDescUpdateVal: '',
     noteDate: ''
   }
+
+  componentDidMount() {
+
+    var searchString = './notes/notes/' + this.props.userId;
+    var parent = this;
+
+    axios.get(searchString).then(function(response) {
+        nts = response.data.data;
+        parent.setState({notes: nts})
+    });
+  }  
 
   addClickHandler = () => {
     this.setState({
@@ -40,13 +57,22 @@ class ObjectivesContent extends Component {
     event.preventDefault();
     const noteTitle = this.state.noteTitleValue;
     const noteDescription = this.state.noteDescValue;
-    this.setState({
-      showNoteModal: false,
-      noteTitleUpdateVal: noteTitle,
-      noteDescUpdateVal: noteDescription,
-      noteDate: 'some/date/here'
+
+    var note = {
+      body: noteDescription,
+      user_id: cookies.get('userId')
+    }
+
+    var parent = this;
+
+    axios.post('./notes/create', note)
+      .then(function(response) {
+        nts.push(response.data.note);
+        parent.setState({
+          showNoteModal: false,
+          notes: nts
+        });
     });
-    console.log(this.state.noteTitleUpdateVal);
   }
 
   render() {
@@ -61,15 +87,16 @@ class ObjectivesContent extends Component {
           onClick={this.addClickHandler}>
         </button>
         <div className="objectives-list">
-          <NoteCard 
-            date={this.state.noteDate}
-            title={this.state.noteTitleUpdateVal}
-            desc={this.state.noteDescUpdateVal}/>
+          {this.state.notes.map((noteItem, index) => {
+            return <NoteCard
+              date={noteItem.createdAt}
+              desc={noteItem.body}
+              key={index}/>
+          })}
         </div>
         {noteModal ? 
           <NoteModal 
             closeNoteModal={this.closeNoteModalClickHandler}
-            updateNoteTitle={this.noteTitleChangeHandler}
             updateNoteDesc={this.noteDescChangeHandler}
             submitNoteForm={this.noteSubmitHandler}/> : null
         }
@@ -78,4 +105,4 @@ class ObjectivesContent extends Component {
   };
 }
 
-export default ObjectivesContent;
+export default NotesContent;

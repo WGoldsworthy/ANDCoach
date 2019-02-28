@@ -119,7 +119,8 @@ render() {
                           <NotesPage {...routeProps} 
                           uName={this.state.firstName}
                           uPic={this.state.profilePic}
-                          uEmail={this.state.email} />
+                          uEmail={this.state.email}
+                          userId={this.state.userId} />
                         )}
                     />
                 </div>
