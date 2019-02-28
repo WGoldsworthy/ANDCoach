@@ -33,7 +33,7 @@ class ObjectivesContent extends Component {
         parent.setState({objectives: objs})
     });
 
-    console.log('pulled info');
+
   }
 
   addClickHandler = () => {
