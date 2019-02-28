@@ -87,7 +87,7 @@ class ObjectiveCard extends Component {
 
   render() {
     return (
-      <li className='objective-card'>
+      <li className='objective-card fade-in-up'>
         <div className = 'objective-details'>
           <div>
             <div className = 'objective-header'>
