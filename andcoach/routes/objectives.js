@@ -44,20 +44,7 @@ router.post("/objUpdateStatus/:id", objectivesController.updateObjectiveStatus);
 router.post("/objDel/:id", objectivesController.deleteObjective);
 
 //Create Objective
-router.post("/create", (req, res) => {
-
-	let objective = new Objective();
-	const {title, notes, evidence, status, user_id} = req.body;
-	objective.title = title;
-	objective.notes = notes;
-	objective.evidence = evidence;
-	objective.status = status;
-	objective.user_id = user_id; // Google Id
-	objective.save(err => {
-		if (err) return res.json({success: false, error: err});
-		return res.json({success: true, objective: objective});
-	})
-});
+router.post("/create", objectivesController.createObjective);
 
 
 
