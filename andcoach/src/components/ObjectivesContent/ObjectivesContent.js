@@ -47,7 +47,6 @@ class ObjectivesContent extends Component {
   }
 
   titleChangeHandler = (event) => {
-    console.log(this.state.titleValue, event.target.value)
     this.setState({
       titleValue: event.target.value
     });
@@ -61,8 +60,8 @@ class ObjectivesContent extends Component {
 
   objSubmitHandler = (event) => {
     event.preventDefault();
-    const title = this.state.titleValue
-    const description = this.state.descValue
+    const title = this.state.titleValue;
+    const description = this.state.descValue;
 
     var objective = {
       title: title,
@@ -105,6 +104,8 @@ class ObjectivesContent extends Component {
 
   saveFormHandler = (event) => {
     event.preventDefault();
+    // const updatedTitle = event.target.value;
+    // const updatedDesc = event.target.value;
     const updatedTitle = this.state.titleEditVal;
     const updatedDesc = this.state.descValue;
     const objId = this.state.id
