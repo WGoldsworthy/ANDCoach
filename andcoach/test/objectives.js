@@ -24,7 +24,6 @@ describe('POST Objectives', () => {
 				.post('/api/create')
 				.send(objective)
 				.end((err, res) => {
-					console.log(err, res);
 					res.should.have.status(200);
 					res.body.should.have.property('success').eql(true);
 					done();
