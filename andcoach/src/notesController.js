@@ -24,6 +24,8 @@ class NotesController {
         const id = req.params.id;
         Note.find({user_id: id}, (err, objs) => {
             if (err) return res.json({success: false, error: err});
+            // This mat cause a test to fail; Alternative solution should be found in front end 
+            // to show how an empty result should display
             // if (!objs.length) return res.status(404).json({success: true, error: err});
             return res.json({success: true, data: objs})
         });

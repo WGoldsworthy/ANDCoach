@@ -4,6 +4,8 @@ var User = require("../models/User");
 
 var crypto = require('crypto');
 
+// The Sessions used here was a custom built sessions middleware.
+// Going forward it may be better to use a standard sessions package (express-session?)
 var generate_key = function() {
     var sha = crypto.createHash('sha256');
     sha.update(Math.random().toString());
